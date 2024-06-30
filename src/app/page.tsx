@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import Marquee from "@/components/magicui/marquee";
 const BLUR_FADE_DELAY = 0.04;
 import { TECS } from "@/data/resume";
+import { Button } from "@/components/ui/button";
 
 const firstRow = TECS.slice(0, TECS.length / 2);
 const secondRow = TECS.slice(TECS.length / 2);
@@ -88,24 +89,25 @@ export default function Page() {
           <BlurFade delay={BLUR_FADE_DELAY * 5}>
             <h2 className="text-xl font-bold">Work Experience</h2>
           </BlurFade>
-          {DATA.work.map((work, id) => (
-            <BlurFade
-              key={work.company}
-              delay={BLUR_FADE_DELAY * 6 + id * 0.05}
-            >
-              <ResumeCard
+          {DATA.work.length > 0 &&
+            DATA.work.map((work: any, id: number) => (
+              <BlurFade
                 key={work.company}
-                logoUrl={work.logoUrl}
-                altText={work.company}
-                title={work.company}
-                subtitle={work.title}
-                href={work.href}
-                badges={work.badges}
-                period={`${work.start} - ${work.end ?? "Present"}`}
-                description={work.description}
-              />
-            </BlurFade>
-          ))}
+                delay={BLUR_FADE_DELAY * 6 + id * 0.05}
+              >
+                <ResumeCard
+                  key={work.company}
+                  logoUrl={work.logoUrl}
+                  altText={work.company}
+                  title={work.company}
+                  subtitle={work.title}
+                  href={work.href}
+                  badges={work.badges}
+                  period={`${work.start} - ${work.end ?? "Present"}`}
+                  description={work.description}
+                />
+              </BlurFade>
+            ))}
         </div>
       </section>
       {/* <section id="education">
@@ -165,7 +167,7 @@ export default function Page() {
         </div>
       </section> */}
       <section id="projects">
-        <div className="space-y-12 w-full py-12">
+        <div className="space-y-12 w-full py-12 items-center flex flex-col">
           <BlurFade delay={BLUR_FADE_DELAY * 11}>
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
@@ -173,7 +175,7 @@ export default function Page() {
                   My Projects
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-transparent bg-clip-text bg-gradient-to-b from-primary from-55% to-secondary">
-                  Check out my latest work
+                  Check out my GitHub
                 </h2>
                 <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   I&apos;ve worked on a variety of projects, from simple
@@ -204,6 +206,11 @@ export default function Page() {
               </BlurFade>
             ))}
           </div>
+          <Link href={"https://github.com/gweepcreative"} target="_blank">
+            <Button className="w-full" variant={"secondary"}>
+              Find more on my GitHub
+            </Button>
+          </Link>
         </div>
       </section>
       <section id="hackathons">

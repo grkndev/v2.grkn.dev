@@ -161,18 +161,18 @@ export const DATA = {
   },
 
   work: [
-    {
-      company: "Nvidia",
-      href: "https://nvidia.com/",
-      badges: [],
-      location: "Santa Clara, CA",
-      title: "Software Engineer",
-      logoUrl: "/nvidia.png",
-      start: "January 2020",
-      end: "April 2020",
-      description:
-        "Architected and wrote the entire MVP of the GeForce Now Cloud Gaming internal admin and A/B testing dashboard using React, Redux, TypeScript, and Python.",
-    },
+    // {
+    //   company: "Nvidia",
+    //   href: "https://nvidia.com/",
+    //   badges: [],
+    //   location: "Santa Clara, CA",
+    //   title: "Software Engineer",
+    //   logoUrl: "/nvidia.png",
+    //   start: "January 2020",
+    //   end: "April 2020",
+    //   description:
+    //     "Architected and wrote the entire MVP of the GeForce Now Cloud Gaming internal admin and A/B testing dashboard using React, Redux, TypeScript, and Python.",
+    // },
   ],
   education: [
     {
@@ -186,9 +186,9 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "RabeL Code",
-      href: "https://rabelcode.net",
-      dates: "2021 - 2023",
+      title: "MouseRobot",
+      href: "https://github.com/GweepCreative/MouseRobot",
+      dates: "Shared May 6, 2024 | Last Updated May 6, 2024",
       active: false,
       description: "A platform where everyone can share code and find new code",
       technologies: ["Next.js", "MondoDB", "TailwindCSS"],
