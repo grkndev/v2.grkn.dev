@@ -1,0 +1,66 @@
+---
+title: "Mornius"
+publishedAt: "2023-10-18"
+summary: "Access to Github API"
+---
+
+[GitHub](https://github.com/grkndev/mornius) | [npm](https://www.npmjs.com/package/mornius)
+version: 1.0.0
+
+Mornius is a package that provides access to the Github API.
+
+## Installation
+
+```bash
+npm install mornius
+```
+
+## Usage
+
+#### getRepositories(query: string)
+
+return repositories that match the query
+
+```ts
+import { getRepositories } from "mornius";
+const repositories = await getRepositories("grkndev/twitcher");
+```
+
+#### getUser(username: string)
+
+return user information
+
+```ts
+import { getUser } from "mornius";
+const user = await getUser("grkndev");
+```
+
+#### searchUsers(query)
+
+return users that match the query
+
+Optional parameters:
+
+- page: number
+- per_page: number
+- sort: "followers" | "repositories" | "joined"
+- order: "desc" | "asc"
+
+```ts
+import { searchUsers } from "mornius";
+const users = await searchUsers("grkndev");
+```
+
+#### searchTopics(query)
+
+return topics that match the query
+
+Optional parameters:
+
+- page: number
+- per_page: number
+
+```ts
+import { searchTopics } from "mornius";
+const topics = await searchTopics("twitcher");
+```

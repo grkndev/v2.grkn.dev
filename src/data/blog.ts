@@ -23,7 +23,6 @@ export async function markdownToHTML(markdown: string) {
     .use(remarkParse)
     .use(remarkRehype)
     .use(rehypePrettyCode, {
-      // https://rehype-pretty.pages.dev/#usage
       theme: {
         light: "min-light",
         dark: "min-dark",
@@ -36,8 +35,9 @@ export async function markdownToHTML(markdown: string) {
   return p.toString();
 }
 
-export async function getPost(slug: string) {
-  const filePath = path.join("content", `${slug}.mdx`);
+export async function getPost(slug: string, type: 'blog' | 'package') {
+  const directory = type === 'blog' ? 'content' : 'docs';
+  const filePath = path.join(process.cwd(), directory, `${slug}.mdx`);
   let source = fs.readFileSync(filePath, "utf-8");
   const { content: rawContent, data: metadata } = matter(source);
   const content = await markdownToHTML(rawContent);
@@ -50,10 +50,12 @@ export async function getPost(slug: string) {
 
 async function getAllPosts(dir: string) {
   let mdxFiles = getMDXFiles(dir);
+
   return Promise.all(
     mdxFiles.map(async (file) => {
       let slug = path.basename(file, path.extname(file));
-      let { metadata, source } = await getPost(slug);
+      let { metadata, source } = await getPost(slug, dir.includes('content') ? 'blog' : 'package');
+      
       return {
         metadata,
         slug,
@@ -65,4 +67,8 @@ async function getAllPosts(dir: string) {
 
 export async function getBlogPosts() {
   return getAllPosts(path.join(process.cwd(), "content"));
+}
+
+export async function getPackagePosts() {
+  return getAllPosts(path.join(process.cwd(), "docs"));
 }

@@ -12,7 +12,7 @@ export async function generateMetadata({
     slug: string;
   };
 }): Promise<Metadata | undefined> {
-  let post = await getPost(params.slug, "blog");
+  let post = await getPost(params.slug, "package");
 
   let {
     title,
@@ -53,7 +53,7 @@ export default async function Blog({
     slug: string;
   };
 }) {
-  let post = await getPost(params.slug, "blog");
+  let post = await getPost(params.slug, "package");
 
   if (!post) {
     notFound();

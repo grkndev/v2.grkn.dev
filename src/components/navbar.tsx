@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
-import { HomeIcon, NotebookIcon } from "lucide-react";
+import { HomeIcon, NotebookIcon, PackageIcon } from "lucide-react";
 import Link from "next/link";
 
 export default function Navbar() {
@@ -32,6 +32,24 @@ export default function Navbar() {
             </TooltipTrigger>
             <TooltipContent>
               <p>Home</p>
+            </TooltipContent>
+          </Tooltip>
+        </DockIcon>
+        <DockIcon>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link
+                href="/packages"
+                className={cn(
+                  buttonVariants({ variant: "ghost", size: "icon" }),
+                  "size-12"
+                )}
+              >
+                <PackageIcon className="size-4" />
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Packages</p>
             </TooltipContent>
           </Tooltip>
         </DockIcon>
