@@ -47,6 +47,13 @@ export const metadata: Metadata = {
     yandex: "",
   },
 };
+export const viewport = {
+  themeColor: "white",
+  colorScheme: "only light",
+  width: "device-width",
+  initialScale: 1,
+};
+
 
 export default function RootLayout({
   children,
