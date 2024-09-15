@@ -34,11 +34,11 @@ export default async function PackagesPage() {
           .map((post, id) => (
             <BlurFade delay={BLUR_FADE_DELAY * 2 + id * 0.05} key={post.slug}>
               <Link
-                className="flex flex-col space-y-1 mb-4 backdrop-blur-sm bg-zinc-900 rounded-xl p-4"
+                className="flex flex-col space-y-1 mb-4 backdrop-blur-sm bg-zinc-200 dark:bg-zinc-900 rounded-xl p-4"
                 href={`/packages/${post.slug}`}
               >
                 <div className="w-full flex flex-col gap-2">
-                  <div className="flex items-center gap-2 text-white">
+                  <div className="flex items-center gap-2 text-black dark:text-white">
                     <div className="flex items-center justify-center bg-red-500 rounded-lg p-2">
                       <NpmIcon
                         color="#fff"
