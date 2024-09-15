@@ -123,6 +123,8 @@ export const DATA = {
   name: "Gürkan Çiloğlu",
   initials: "GC",
   url: "https://grkn.dev",
+  keywords:
+    "Grkn Dev, Gürkan Çiloğlu, Grkn, GrknDev, GrknDev.com, Software engineer, Next.js, React, React Native, TypeScript, Node.js, Python, Go, Postgres, Docker, Kubernetes, C#, C++, Arduino, HTML, CSS, Tailwind CSS, Git, Figma, Photoshop, After Effects, Premiere Pro, Discord, Samsung, LinkedIn, GitHub, X, Twitter",
 
   description:
     "Software Engineer.I develop mostly backend and mobile.I love building things and helping people.I am very active on Twitter.",
@@ -197,7 +199,7 @@ export const DATA = {
           type: "Website",
           href: "https://rabelcode.net",
           icon: <Icons.globe className="size-3" />,
-        }
+        },
       ],
       image: "/rabelcode.png",
       video: "",
@@ -210,8 +212,7 @@ export const DATA = {
       location: "Remote",
       description:
         "During the month, I specialized in react native and taught me how to build and publish mobile-focused products. A long-term adventure where I learned a new project and a new feature every day",
-      image:
-        "",
+      image: "",
       mlh: "",
       links: [],
     },
@@ -221,8 +222,7 @@ export const DATA = {
       location: "Remote",
       description:
         "The training I received in mobile application development, testing and publishing with React Native ",
-      image:
-        "",
+      image: "",
       mlh: "",
       links: [],
     },
@@ -232,8 +232,7 @@ export const DATA = {
       location: "Turkiye, Istanbul",
       description:
         "Constructive industry insights and new teachings from today's engineering luminaries.",
-      image:
-        "",
+      image: "",
       mlh: "",
       links: [],
     },
