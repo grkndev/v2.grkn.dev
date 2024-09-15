@@ -20,7 +20,7 @@ export async function generateMetadata({
     summary: description,
     image,
   } = post.metadata;
-  let ogImage = image ? `${DATA.url}/${image}` : `${DATA.url}/packages/${params.slug}/opengraph-image`;
+  let ogImage = `${DATA.url}/packages/${params.slug}/opengraph-image`;
 
   return {
     title,
@@ -30,7 +30,7 @@ export async function generateMetadata({
       description,
       type: "article",
       publishedTime,
-      url: `${DATA.url}/blog/${post.slug}`,
+      url: `${DATA.url}/packages/${post.slug}`,
       images: [
         {
           url: ogImage,
