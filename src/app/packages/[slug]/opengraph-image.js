@@ -22,10 +22,10 @@ export const contentType = sharedImage.type;
 } */
 
 
-export default async function Image() {
-  const headersList = headers();
-  const pathname = headersList.get("x-invoke-path") || "";
-  const packageName = pathname.split("/")[2];
+export default async function Image({ params }) {
+  // const headersList = headers();
+  // const pathname = headersList.get("x-invoke-path") || "";
+  const packageName = params.slug;
   console.log("packageName", packageName);
   const [regularFontData, boldFontData] = await Promise.all([
     getRegularFont(),
