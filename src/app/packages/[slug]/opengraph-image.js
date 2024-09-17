@@ -1,12 +1,7 @@
 import { ImageResponse } from "next/og";
 import { OpenGraphImage } from "@/components/og-image";
 import { getRegularFont, getBoldFont } from "@/lib/fonts";
-import {
-  sharedTitle,
-  sharedDescription,
-  sharedImage,
-} from "@/app/shared-metadata";
-import { headers } from "next/headers";
+import { sharedTitle, sharedImage } from "@/app/shared-metadata";
 export const runtime = "edge";
 export const alt = `${sharedTitle} - Packages`;
 export const size = {
@@ -15,18 +10,8 @@ export const size = {
 };
 export const contentType = sharedImage.type;
 
-/* export const getImage = async () => {
-  const response = await fetch(new URL('@/assets/me.jpg', import.meta.url))
-  const font = await response.arrayBuffer()
-  return font
-} */
-
-
 export default async function Image({ params }) {
-  // const headersList = headers();
-  // const pathname = headersList.get("x-invoke-path") || "";
   const packageName = params.slug;
-  console.log("packageName", packageName);
   const [regularFontData, boldFontData] = await Promise.all([
     getRegularFont(),
     getBoldFont(),

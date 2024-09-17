@@ -18,7 +18,6 @@ export async function generateMetadata({
     title,
     publishedAt: publishedTime,
     summary: description,
-    image,
   } = post.metadata;
   let ogImage = `${DATA.url}/packages/${params.slug}/opengraph-image`;
 
@@ -28,8 +27,7 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
-      type: "article",
-      publishedTime,
+      type: "website",
       url: `${DATA.url}/packages/${post.slug}`,
       images: [
         {
@@ -38,6 +36,8 @@ export async function generateMetadata({
       ],
     },
     twitter: {
+      creator: "@grkndev",
+      site: "@grkndev",
       card: "summary_large_image",
       title,
       description,
