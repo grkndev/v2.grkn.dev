@@ -188,18 +188,65 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "MouseRobot",
-      href: "https://github.com/GweepCreative/MouseRobot",
-      dates: "Shared May 6, 2024 | Last Updated May 6, 2024",
+      title: "Snowflake Id",
+      href: "https://github.com/grkndev/snowflake-id",
+      dates: "Shared Sep 15, 2024 | Last Updated Sep 17, 2024",
       active: false,
-      description: "A platform where everyone can share code and find new code",
-      technologies: ["Next.js", "MondoDB", "TailwindCSS"],
+      description: "A simple Snowflake ID generator for JavaScript and TypeScript projects.",
+      technologies: ["npm", "TypeScript", "Javascript"],
       links: [
         {
-          type: "Website",
-          href: "https://rabelcode.net",
+          type: "NPM",
+          href: "https://www.npmjs.com/package/@grkndev/snowflakeid",
           icon: <Icons.globe className="size-3" />,
         },
+      ],
+      image: "/rabelcode.png",
+      video: "",
+    },
+    {
+      title: "Mornius",
+      href: "https://github.com/grkndev/mornius",
+      dates: "Shared Jan 31, 2024 | Last Updated Jan 31, 2024",
+      active: false,
+      description: "Easily access and use Github API service",
+      technologies: ["npm", "TypeScript", "Javascript","Github Api"],
+      links: [
+        {
+          type: "NPM",
+          href: "https://www.npmjs.com/package/mornius",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "/rabelcode.png",
+      video: "",
+    },
+    {
+      title: "Twitcher",
+      href: "https://github.com/grkndev/Twitcher",
+      dates: "Shared Nov 11, 2023 | Last Updated Now 27, 2023",
+      active: false,
+      description: "A great library that will allow you to use the Twitch API service. All you need to do is use your Token and Client Id information.",
+      technologies: ["npm", "TypeScript", "Javascript","Twitch Api"],
+      links: [
+        {
+          type: "NPM",
+          href: "https://www.npmjs.com/package/twitcher",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "/rabelcode.png",
+      video: "",
+    },
+    {
+      title: "DEVember",
+      href: "https://github.com/grkndev/DEVember",
+      dates: "Shared Dec 10, 2023 | Last Updated Jan 1, 2024",
+      active: false,
+      description: "React Native bootcamp using Expo",
+      technologies: ["React","React Native", "TypeScript", "Javascript","Mobile"],
+      links: [
+        
       ],
       image: "/rabelcode.png",
       video: "",
