@@ -27,6 +27,7 @@ const ReviewCard = ({ icon, title }: { icon: string; title: string }) => {
         "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
       )}
     >
+      
       <div className="flex flex-row items-center gap-2">
         <img
           className="rounded-full"
@@ -48,6 +49,7 @@ const ReviewCard = ({ icon, title }: { icon: string; title: string }) => {
 export default function Page() {
   return (
     <main className="flex flex-col min-h-[100dvh] space-y-10">
+      
       <section id="hero">
         <div className="mx-auto w-full max-w-5xl space-y-8">
           <div className="gap-2 flex justify-between">
@@ -174,7 +176,7 @@ export default function Page() {
                 <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
                   My Projects
                 </div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-transparent bg-clip-text bg-gradient-to-b from-primary from-55% to-secondary">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-transparent bg-clip-text bg-gradient-to-l from-secondary via-primary to-secondary p-4">
                   Check out my GitHub
                 </h2>
                 <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -223,7 +225,7 @@ export default function Page() {
                 <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
                   Hackathons
                 </div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-transparent bg-clip-text bg-gradient-to-b from-primary from-55% to-secondary">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-transparent bg-clip-text bg-gradient-to-l from-secondary via-primary to-secondary p-4">
                   I like building things
                 </h2>
                 <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -262,7 +264,7 @@ export default function Page() {
         <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full py-12">
           <BlurFade delay={BLUR_FADE_DELAY * 16}>
             <div className="space-y-3">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-transparent bg-clip-text bg-gradient-to-b from-primary from-55% to-secondary">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-transparent bg-clip-text bg-gradient-to-l from-secondary via-primary to-secondary p-4">
                 if is it works, don&apos;t touch it
               </h2>
               <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">

@@ -127,9 +127,9 @@ export const DATA = {
     "Grkn Dev, Gürkan Çiloğlu, Grkn, GrknDev, GrknDev.com, Software engineer, Next.js, React, React Native, TypeScript, Node.js, Python, Go, Postgres, Docker, Kubernetes, C#, C++, Arduino, HTML, CSS, Tailwind CSS, Git, Figma, Photoshop, After Effects, Premiere Pro, Discord, Samsung, LinkedIn, GitHub, X, Twitter",
 
   description:
-    "Software Engineer.I develop mostly backend and mobile.I love building things and helping people.I am very active on Twitter.",
+    "Software Developer. I mostly develop backend and mobile . I love building things and helping people.",
   summary:
-    "I develop things as a Senior Software Engineer. I'm developing somethings for Discord and Samsung. I also have expertise and experience in embedded systems, web development, object oriented programming.",
+    "I develop things as a Software Developer. I'm developing somethings for Discord. I also have expertise and experience in embedded systems, web development, mobile development and object oriented programming.",
   avatarUrl: "/me.jpg",
   skills: [
     "React",
