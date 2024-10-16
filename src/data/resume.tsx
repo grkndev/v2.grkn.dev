@@ -148,7 +148,7 @@ export const DATA = {
     email: "info@grkn.dev",
     social: {
       GitHub: {
-        url: "https://github.com/gweepcreative",
+        url: "https://github.com/grkndev",
         icon: Icons.github,
       },
       LinkedIn: {
@@ -190,9 +190,10 @@ export const DATA = {
     {
       title: "Snowflake Id",
       href: "https://github.com/grkndev/snowflake-id",
-      dates: "Shared Sep 15, 2024 | Last Updated Sep 17, 2024",
+      dates: "Shared Sep 15, 2024 | Last Updated Oct 10, 2024",
       active: false,
-      description: "A simple Snowflake ID generator for JavaScript and TypeScript projects.",
+      description:
+        "A simple Snowflake ID generator for JavaScript and TypeScript projects.",
       technologies: ["npm", "TypeScript", "Javascript"],
       links: [
         {
@@ -210,7 +211,7 @@ export const DATA = {
       dates: "Shared Jan 31, 2024 | Last Updated Jan 31, 2024",
       active: false,
       description: "Easily access and use Github API service",
-      technologies: ["npm", "TypeScript", "Javascript","Github Api"],
+      technologies: ["npm", "TypeScript", "Javascript", "Github Api"],
       links: [
         {
           type: "NPM",
@@ -226,8 +227,9 @@ export const DATA = {
       href: "https://github.com/grkndev/Twitcher",
       dates: "Shared Nov 11, 2023 | Last Updated Now 27, 2023",
       active: false,
-      description: "A great library that will allow you to use the Twitch API service. All you need to do is use your Token and Client Id information.",
-      technologies: ["npm", "TypeScript", "Javascript","Twitch Api"],
+      description:
+        "A great library that will allow you to use the Twitch API service. All you need to do is use your Token and Client Id information.",
+      technologies: ["npm", "TypeScript", "Javascript", "Twitch Api"],
       links: [
         {
           type: "NPM",
@@ -244,15 +246,30 @@ export const DATA = {
       dates: "Shared Dec 10, 2023 | Last Updated Jan 1, 2024",
       active: false,
       description: "React Native bootcamp using Expo",
-      technologies: ["React","React Native", "TypeScript", "Javascript","Mobile"],
-      links: [
-        
+      technologies: [
+        "React",
+        "React Native",
+        "TypeScript",
+        "Javascript",
+        "Mobile",
       ],
+      links: [],
       image: "/rabelcode.png",
       video: "",
     },
   ],
   hackathons: [
+    // {
+    //   title: "Google DevFest",
+    //   dates: "December 7th - 10th, 2024",
+    //   location: "Turkiye, Izmir",
+    //   description:
+    //     "With the Developer event organized by the Google Developer Community every year in various locations around the world, I learned about next-generation technologies, tools and learned how to develop effectively in my business career.",
+    //   image: "",
+    //   mlh: "",
+    //   links: [],
+    // },
+    
     {
       title: "DEVember",
       dates: "December 5th - 29th, 2023",
