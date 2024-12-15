@@ -188,6 +188,7 @@ export const DATA = {
   ],
   projects: [
     {
+      hasError: true,
       title: "Snowflake Id",
       href: "https://github.com/grkndev/snowflake-id",
       dates: "Shared Sep 15, 2024 | Last Updated Oct 10, 2024",
@@ -207,6 +208,7 @@ export const DATA = {
     },
     {
       title: "Mornius",
+      hasError: false,
       href: "https://github.com/grkndev/mornius",
       dates: "Shared Jan 31, 2024 | Last Updated Jan 31, 2024",
       active: false,
@@ -224,6 +226,7 @@ export const DATA = {
     },
     {
       title: "Twitcher",
+      hasError: false,
       href: "https://github.com/grkndev/Twitcher",
       dates: "Shared Nov 11, 2023 | Last Updated Now 27, 2023",
       active: false,
@@ -242,6 +245,7 @@ export const DATA = {
     },
     {
       title: "DEVember",
+      hasError: false,
       href: "https://github.com/grkndev/DEVember",
       dates: "Shared Dec 10, 2023 | Last Updated Jan 1, 2024",
       active: false,

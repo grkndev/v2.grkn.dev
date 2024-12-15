@@ -20,6 +20,7 @@ interface Props {
   active: boolean;
   link?: string;
   image?: string;
+  hasError?: boolean;
   video?: string;
   links?: readonly {
     icon: React.ReactNode;
@@ -40,6 +41,7 @@ export function ProjectCard({
   image,
   video,
   links,
+  hasError,
   className,
 }: Props) {
   return (
