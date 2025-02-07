@@ -120,6 +120,7 @@ export const TECS = [
   },
 ] as const;
 export const DATA = {
+  gads: "5902111857271047",
   name: "Gürkan Çiloğlu",
   initials: "GC",
   url: "https://grkn.dev",
@@ -263,17 +264,17 @@ export const DATA = {
     },
   ],
   hackathons: [
-     {
-       title: "Google DevFest",
-       dates: "December 7th - 10th, 2024",
-       location: "Turkiye, Izmir",
-       description:
-         "With the Developer event organized by the Google Developer Community every year in various locations around the world, I learned about next-generation technologies, tools and learned how to develop effectively in my business career.",
-       image: "",
-       mlh: "",
-       links: [],
-     },
-    
+    {
+      title: "Google DevFest",
+      dates: "December 7th - 10th, 2024",
+      location: "Turkiye, Izmir",
+      description:
+        "With the Developer event organized by the Google Developer Community every year in various locations around the world, I learned about next-generation technologies, tools and learned how to develop effectively in my business career.",
+      image: "",
+      mlh: "",
+      links: [],
+    },
+
     {
       title: "DEVember",
       dates: "December 5th - 29th, 2023",

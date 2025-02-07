@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Montserrat as FontSans } from "next/font/google";
 import "./globals.css";
+import GoogleAdsense from "@/components/Google/GoogleAdsense";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -75,6 +76,8 @@ export default function RootLayout({
             {children}
           </TooltipProvider>
         </ThemeProvider>
+
+        <GoogleAdsense pId={DATA.gads} />
       </body>
     </html>
   );
