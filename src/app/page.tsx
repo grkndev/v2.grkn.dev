@@ -210,7 +210,7 @@ export default function Page() {
               </BlurFade>
             ))}
           </div>
-          <Link href={"https://github.com/gweepcreative"} target="_blank">
+          <Link href={"https://github.com/grkndev"} target="_blank">
             <Button className="w-full" variant={"secondary"}>
               Find more on my GitHub
             </Button>
