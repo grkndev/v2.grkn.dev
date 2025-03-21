@@ -27,7 +27,6 @@ const ReviewCard = ({ icon, title }: { icon: string; title: string }) => {
         "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
       )}
     >
-      
       <div className="flex flex-row items-center gap-2">
         <img
           className="rounded-full"
@@ -49,7 +48,6 @@ const ReviewCard = ({ icon, title }: { icon: string; title: string }) => {
 export default function Page() {
   return (
     <main className="flex flex-col min-h-[100dvh] space-y-10">
-      
       <section id="hero">
         <div className="mx-auto w-full max-w-5xl space-y-8">
           <div className="gap-2 flex justify-between">
@@ -195,8 +193,9 @@ export default function Page() {
                 className="h-full "
               >
                 <ProjectCard
-                className="h-full"
+                  className="h-full"
                   href={project.href}
+                  hasError={project.hasError ? project.hasError : false}
                   key={project.title}
                   title={project.title}
                   description={project.description}
@@ -210,7 +209,7 @@ export default function Page() {
               </BlurFade>
             ))}
           </div>
-          <Link href={"https://github.com/gweepcreative"} target="_blank">
+          <Link href={"https://github.com/grkndev"} target="_blank">
             <Button className="w-full" variant={"secondary"}>
               Find more on my GitHub
             </Button>

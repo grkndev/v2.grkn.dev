@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 import { Montserrat as FontSans } from "next/font/google";
 import "./globals.css";
 import GoogleAdsense from "@/components/Google/GoogleAdsense";
+import { PageLoadingProvider } from "@/components/page-loading-provider";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -72,8 +73,10 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="light">
           <TooltipProvider delayDuration={0}>
-            <Navbar />
-            {children}
+            <PageLoadingProvider>
+              <Navbar />
+              {children}
+            </PageLoadingProvider>
           </TooltipProvider>
         </ThemeProvider>
 
