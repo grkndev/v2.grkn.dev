@@ -1,21 +1,23 @@
-import { HackathonCard } from "@/components/hackathon-card";
+import { Button } from "@/components/ui/button";
+import Marquee from "@/components/magicui/marquee";
 import BlurFade from "@/components/magicui/blur-fade";
-import BlurFadeText from "@/components/magicui/blur-fade-text";
-import { ProjectCard } from "@/components/project-card";
 import { ResumeCard } from "@/components/resume-card";
+import { ProjectCard } from "@/components/project-card";
+import { HackathonCard } from "@/components/hackathon-card";
+import BlurFadeText from "@/components/magicui/blur-fade-text";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
+
+import { cn } from "@/lib/utils";
 import { DATA } from "@/data/resume";
+import { TECS } from "@/data/resume";
+
 import Link from "next/link";
 import Markdown from "react-markdown";
-import { cn } from "@/lib/utils";
-import Marquee from "@/components/magicui/marquee";
-const BLUR_FADE_DELAY = 0.04;
-import { TECS } from "@/data/resume";
-import { Button } from "@/components/ui/button";
 
+const BLUR_FADE_DELAY = 0.04;
 const firstRow = TECS.slice(0, TECS.length / 2);
 const secondRow = TECS.slice(TECS.length / 2);
+
 const ReviewCard = ({ icon, title }: { icon: string; title: string }) => {
   return (
     <figure

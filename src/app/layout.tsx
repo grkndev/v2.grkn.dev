@@ -8,6 +8,7 @@ import { Montserrat as FontSans } from "next/font/google";
 import "./globals.css";
 import GoogleAdsense from "@/components/Google/GoogleAdsense";
 import { PageLoadingProvider } from "@/components/page-loading-provider";
+import { DotPattern } from "@/components/magicui/dot-pattern";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -71,7 +72,9 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
+      
         <ThemeProvider attribute="class" defaultTheme="light">
+          
           <TooltipProvider delayDuration={0}>
             <PageLoadingProvider>
               <Navbar />
