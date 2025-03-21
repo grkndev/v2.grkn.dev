@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useSearchParams } from "next/navigation";
-import { createContext, useContext, useEffect, useState, useRef } from "react";
+import { createContext, useContext, useEffect, useState, useRef, Suspense } from "react";
 import { LoadingSpinner } from "./ui/loading-spinner";
 
 interface PageLoadingContextType {
@@ -16,12 +16,12 @@ const PageLoadingContext = createContext<PageLoadingContextType>({
 
 export const usePageLoading = () => useContext(PageLoadingContext);
 
-export function PageLoadingProvider({
-  children,
-}: {
-  children: React.ReactNode;
+// Separate component that uses useSearchParams
+function PageTransitionHandler({ 
+  setIsLoading 
+}: { 
+  setIsLoading: (isLoading: boolean) => void 
 }) {
-  const [isLoading, setIsLoading] = useState(false);
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const prevPathnameRef = useRef(pathname);
@@ -68,10 +68,23 @@ export function PageLoadingProvider({
         clearTimeout(timerRef.current);
       }
     };
-  }, [pathname, searchParams]);
+  }, [pathname, searchParams, setIsLoading]);
+
+  return null;
+}
+
+export function PageLoadingProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <PageLoadingContext.Provider value={{ isLoading, setIsLoading }}>
+      <Suspense fallback={null}>
+        <PageTransitionHandler setIsLoading={setIsLoading} />
+      </Suspense>
       {children}
       {isLoading && (
         <div className="fixed inset-0 flex items-center justify-center bg-background/80 backdrop-blur-sm z-50">

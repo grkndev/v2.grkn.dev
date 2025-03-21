@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import Markdown from "react-markdown";
-
+import { MagicCard } from "@/components/magicui/magic-card";
 interface Props {
   title: string;
   href?: string;
@@ -46,9 +46,9 @@ export function ProjectCard({
 }: Props) {
   return (
     <Link href={href || "#"} className={cn("block cursor-pointer", className)} target="_blank">
-      <Card
+      <MagicCard
         className={
-          "flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full p-2"
+          "flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full p-2 rounded-lg border-none"
         }
       >
         {/* <Link
@@ -114,7 +114,7 @@ export function ProjectCard({
             </div>
           )} */}
         {/* </CardFooter> */}
-      </Card>
+      </MagicCard>
     </Link>
   );
 }
