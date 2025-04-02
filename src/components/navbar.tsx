@@ -11,7 +11,8 @@ import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import { HomeIcon, NotebookIcon, PackageIcon } from "lucide-react";
 import Link from "next/link";
-
+import Image from "next/image";
+import GDevIcon from "./Icons/gdev";
 export default function Navbar() {
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 mx-auto mb-4 flex origin-bottom h-full max-h-14">
@@ -68,6 +69,24 @@ export default function Navbar() {
             </TooltipTrigger>
             <TooltipContent>
               <p>Blog</p>
+            </TooltipContent>
+          </Tooltip>
+        </DockIcon>
+        <DockIcon>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link
+                href="/branding"
+                className={cn(
+                  buttonVariants({ variant: "ghost", size: "icon" }),
+                  "size-12"
+                )}
+              >
+              <GDevIcon />
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Branding</p>
             </TooltipContent>
           </Tooltip>
         </DockIcon>
