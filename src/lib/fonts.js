@@ -22,3 +22,14 @@ export const getBoldFont = cache(async () => {
   const font = await response.arrayBuffer()
   return font
 })
+
+/**
+ * Retrieves the quantify font file asynchronously.
+ * It returns a Promise that resolves to the font file's array buffer.
+ * @returns A Promise resolving to the quantify font file as an array buffer.
+ */
+export const getQuantifyFont = cache(async () => {
+  const response = await fetch(new URL('@/assets/fonts/Quantify.ttf', import.meta.url))
+  const font = await response.arrayBuffer()
+  return font
+})

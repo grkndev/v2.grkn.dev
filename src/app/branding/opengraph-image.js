@@ -24,8 +24,9 @@ export default async function Image() {
   return new ImageResponse(
     (
       <OpenGraphImage
-        title={sharedTitle}
-        description={sharedDescription}
+        title={`${sharedTitle} | Branding`}
+        description={`Official logo assets and usage guidelines`}
+        url={"branding"}
         icon={
           <svg
             xmlns="http://www.w3.org/2000/svg"
