@@ -1,3 +1,4 @@
+"use client";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -11,6 +12,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import { MagicCard } from "@/components/magicui/magic-card";
+import { useTheme } from "next-themes";
 interface Props {
   title: string;
   href?: string;
@@ -44,9 +46,13 @@ export function ProjectCard({
   hasError,
   className,
 }: Props) {
+  const { theme, setTheme } = useTheme();
   return (
     <Link href={href || "#"} className={cn("block cursor-pointer", className)} target="_blank">
       <MagicCard
+      gradientColor={
+        theme === "dark" ? "#262626" : "#F2F2F2"
+      }
         className={
           "flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full p-2 rounded-lg border-none"
         }

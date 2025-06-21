@@ -14,6 +14,7 @@ import { TECS } from "@/data/resume";
 import Link from "next/link";
 import Markdown from "react-markdown";
 
+
 const BLUR_FADE_DELAY = 0.04;
 const firstRow = TECS.slice(0, TECS.length / 2);
 const secondRow = TECS.slice(TECS.length / 2);
