@@ -99,25 +99,25 @@ export default function RootLayout({
     "headline": "Snowflake Id - npm package",
     "url": "https://grkn.dev/packages/snowflakeid",
     "datePublished": "2025-03-05T18:34:00Z",
-    "author": { "@id": "#main-author" }
+    "author": { "@id": "#main-author", "url": "https://grkn.dev/", "name": "GrknDev" }
   },{
     "@type": "Article",
     "headline": "Mornius - npm package",
     "url": "https://grkn.dev/packages/mornius",
     "datePublished": "2023-10-18T18:34:00Z",
-    "author": { "@id": "#main-author" }
+    "author": { "@id": "#main-author", "url": "https://grkn.dev/", "name": "GrknDev" }
   },{
     "@type": "Article",
     "headline": "Twitcher - npm package",
     "url": "https://grkn.dev/packages/twitcher",
     "datePublished": "2024-05-01T18:34:00Z",
-    "author": { "@id": "#main-author" }
+    "author": { "@id": "#main-author", "url": "https://grkn.dev/", "name": "GrknDev" }
   },{
     "@type": "Article",
     "headline": "Branding - Portfolio",
     "url": "https://grkn.dev/branding",
     "datePublished": "2025-08-31T18:34:00Z",
-    "author": { "@id": "#main-author" }
+    "author": { "@id": "#main-author", "url": "https://grkn.dev/", "name": "GrknDev" }
   }],
         "sameAs": [
           "https://www.grkn.dev/",
