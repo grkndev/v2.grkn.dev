@@ -66,15 +66,77 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: `
+{
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "dateCreated": "2020-01-01T12:00:00-05:00",
+      "dateModified": "2025-08-31T12:00:00-05:00",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "Gürkan Çiloğlu",
+        "alternateName": "grkndev",
+        "identifier": "grkndev",
+        "interactionStatistic": [{
+          "@type": "InteractionCounter",
+          "interactionType": "https://schema.org/FollowAction",
+          "userInteractionCount": 1
+        },{
+          "@type": "InteractionCounter",
+          "interactionType": "https://schema.org/LikeAction",
+          "userInteractionCount": 5
+        }],
+        "agentInteractionStatistic": {
+          "@type": "InteractionCounter",
+          "interactionType": "https://schema.org/WriteAction",
+          "userInteractionCount": 347
+        },
+        "description": "Software Developer",
+        "image": "https://www.grkn.dev/me.jpg",
+        "hasPart": [{
+    "@type": "Article",
+    "headline": "Snowflake Id - npm package",
+    "url": "https://grkn.dev/packages/snowflakeid",
+    "datePublished": "2025-03-05T18:34:00Z",
+    "author": { "@id": "#main-author" }
+  },{
+    "@type": "Article",
+    "headline": "Mornius - npm package",
+    "url": "https://grkn.dev/packages/mornius",
+    "datePublished": "2023-10-18T18:34:00Z",
+    "author": { "@id": "#main-author" }
+  },{
+    "@type": "Article",
+    "headline": "Twitcher - npm package",
+    "url": "https://grkn.dev/packages/twitcher",
+    "datePublished": "2024-05-01T18:34:00Z",
+    "author": { "@id": "#main-author" }
+  },{
+    "@type": "Article",
+    "headline": "Branding - Portfolio",
+    "url": "https://grkn.dev/branding",
+    "datePublished": "2025-08-31T18:34:00Z",
+    "author": { "@id": "#main-author" }
+  }],
+        "sameAs": [
+          "https://www.grkn.dev/",
+          "https://grkn.dev/"
+        ]
+      }
+    }
+`}} />
+
+
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased max-w-5xl mx-auto py-12 sm:py-24 px-6",
           fontSans.variable
         )}
       >
-      
+
         <ThemeProvider attribute="class" defaultTheme="light">
-          
+
           <TooltipProvider delayDuration={0}>
             <PageLoadingProvider>
               <Navbar />
