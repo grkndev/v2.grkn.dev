@@ -179,12 +179,12 @@ export const DATA = {
   ],
   education: [
     {
-      school: "Wilfrid Laurier University",
-      href: "https://wlu.ca",
-      degree: "Bachelor's Degree of Business Administration (BBA)",
-      logoUrl: "/laurier.png",
-      start: "2016",
-      end: "2021",
+      school: "Middle East Technical University",
+      href: "https://metu.edu.tr",
+      degree: "Bachelor of Science in Software Engineering",
+      logoUrl: "/metu_logo.svg",
+      start: "",
+      end: "",
     },
   ],
   projects: [

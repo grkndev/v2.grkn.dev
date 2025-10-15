@@ -87,7 +87,7 @@ export default function Page() {
         </BlurFade>
       </section>
 
-      <section id="work">
+      {/* <section id="work">
         <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 5}>
             <h2 className="text-xl font-bold">Work Experience</h2>
@@ -112,8 +112,29 @@ export default function Page() {
               </BlurFade>
             ))}
         </div>
+      </section> */}
+      
+      <section id="skills">
+        {TECS.length > 0 && (
+          <BlurFade delay={BLUR_FADE_DELAY * 9}>
+            <BlurFade delay={BLUR_FADE_DELAY * 9}>
+              <h2 className="text-xl font-bold">Skills</h2>
+            </BlurFade>
+            <Marquee pauseOnHover className="[--duration:60s] ">
+              {firstRow.map((review) => (
+                <ReviewCard key={review.title} {...review} />
+              ))}
+            </Marquee>
+            <Marquee reverse pauseOnHover className="[--duration:60s]">
+              {secondRow.map((review) => (
+                <ReviewCard key={review.title} {...review} />
+              ))}
+            </Marquee>
+          </BlurFade>
+        )}
       </section>
-      {/* <section id="education">
+
+      <section id="education">
         <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 7}>
             <h2 className="text-xl font-bold">Education</h2>
@@ -135,26 +156,9 @@ export default function Page() {
             </BlurFade>
           ))}
         </div>
-      </section> */}
-      <section id="skills">
-        {TECS.length > 0 && (
-          <BlurFade delay={BLUR_FADE_DELAY * 9}>
-            <BlurFade delay={BLUR_FADE_DELAY * 9}>
-              <h2 className="text-xl font-bold">Skills</h2>
-            </BlurFade>
-            <Marquee pauseOnHover className="[--duration:60s] ">
-              {firstRow.map((review) => (
-                <ReviewCard key={review.title} {...review} />
-              ))}
-            </Marquee>
-            <Marquee reverse pauseOnHover className="[--duration:60s]">
-              {secondRow.map((review) => (
-                <ReviewCard key={review.title} {...review} />
-              ))}
-            </Marquee>
-          </BlurFade>
-        )}
       </section>
+
+
       {/* <section id="skills">
         <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 9}>
