@@ -265,6 +265,16 @@ export const DATA = {
   ],
   hackathons: [
     {
+      title: "METU Cybersecurity Society CTF Competition",
+      dates: "December 4th, 2025",
+      location: "Turkiye",
+      description:
+        "I learned how data is stolen in the digital world (hacking) and how to protect against it. After that, I became the first among 32 participants in a CTF competition.",
+      image: "",
+      mlh: "",
+      links: [],
+    },
+    {
       title: "Google DevFest",
       dates: "December 7th - 10th, 2024",
       location: "Turkiye, Izmir",
