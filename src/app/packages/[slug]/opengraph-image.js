@@ -11,7 +11,8 @@ export const size = {
 export const contentType = sharedImage.type;
 
 export default async function Image({ params }) {
-  const packageName = params.slug;
+  const { slug } = await params;
+  const packageName = slug;
   const [regularFontData, boldFontData] = await Promise.all([
     getRegularFont(),
     getBoldFont(),

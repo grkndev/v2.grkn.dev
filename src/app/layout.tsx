@@ -66,8 +66,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{
-        __html: `
+      <head>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{
+          __html: `
 {
       "@context": "https://schema.org",
       "@type": "ProfilePage",
@@ -126,8 +127,7 @@ export default function RootLayout({
       }
     }
 `}} />
-
-
+      </head>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased max-w-5xl mx-auto py-12 sm:py-24 px-6",

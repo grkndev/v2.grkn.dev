@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useMotionTemplate, useMotionValue } from "motion/react";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -27,6 +27,12 @@ export function MagicCard({
   const cardRef = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(-gradientSize);
   const mouseY = useMotionValue(-gradientSize);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Only render motion styles after mount to avoid hydration mismatch
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
@@ -75,6 +81,19 @@ export function MagicCard({
     mouseY.set(-gradientSize);
   }, [gradientSize, mouseX, mouseY]);
 
+  // Create motion templates
+  const backgroundGradient = useMotionTemplate`
+    radial-gradient(${gradientSize}px circle at ${mouseX}px ${mouseY}px,
+    ${gradientFrom},
+    ${gradientTo},
+    hsl(var(--border)) 100%
+    )
+  `;
+
+  const overlayGradient = useMotionTemplate`
+    radial-gradient(${gradientSize}px circle at ${mouseX}px ${mouseY}px, ${gradientColor}, transparent 100%)
+  `;
+
   return (
     <div
       ref={cardRef}
@@ -82,25 +101,12 @@ export function MagicCard({
     >
       <motion.div
         className="pointer-events-none absolute inset-0 rounded-[inherit] bg-border duration-300 group-hover:opacity-100"
-        style={{
-          background: useMotionTemplate`
-          radial-gradient(${gradientSize}px circle at ${mouseX}px ${mouseY}px,
-          ${gradientFrom}, 
-          ${gradientTo}, 
-          hsl(var(--border)) 100%
-          )
-          `,
-        }}
+        style={isMounted ? { background: backgroundGradient } : undefined}
       />
       <div className="absolute inset-px rounded-[inherit] bg-background" />
       <motion.div
         className="pointer-events-none absolute inset-px rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{
-          background: useMotionTemplate`
-            radial-gradient(${gradientSize}px circle at ${mouseX}px ${mouseY}px, ${gradientColor}, transparent 100%)
-          `,
-          opacity: gradientOpacity,
-        }}
+        style={isMounted ? { background: overlayGradient, opacity: gradientOpacity } : undefined}
       />
       <div className="relative">{children}</div>
     </div>
