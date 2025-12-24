@@ -73,7 +73,7 @@ export default function RootLayout({
       "@context": "https://schema.org",
       "@type": "ProfilePage",
       "dateCreated": "2020-01-01T12:00:00-05:00",
-      "dateModified": "2025-08-31T12:00:00-05:00",
+      "dateModified": "2025-12-24T15:00:00-05:00",
       "mainEntity": {
         "@type": "Person",
         "name": "Gürkan Çiloğlu",

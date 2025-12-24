@@ -27,7 +27,7 @@ export const ResumeCard = ({
 }: ResumeCardProps) => {
   return (
     <Link href={href || "#"} className="block cursor-pointer">
-      <Card className="flex">
+      <Card className="flex bg-background">
         <div className="flex-none">
           <Avatar className="border size-12 m-auto bg-muted-background dark:bg-foreground">
             <AvatarImage
