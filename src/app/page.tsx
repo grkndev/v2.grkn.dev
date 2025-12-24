@@ -271,7 +271,7 @@ export default function Page() {
           <BlurFade delay={BLUR_FADE_DELAY * 16}>
             <div className="space-y-3">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-transparent bg-clip-text bg-gradient-to-l from-secondary via-primary to-secondary p-4">
-                if is it works, don&apos;t touch it
+              If it works, don't touch it&apos;s
               </h2>
               <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 Are you trying to reach me? How about sending me an e-mail? U
