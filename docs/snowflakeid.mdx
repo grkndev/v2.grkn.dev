@@ -2,11 +2,11 @@
 title: "Snowflake ID"
 publishedAt: "2025-03-05"
 summary: "A comprehensive guide to installing and using the SnowflakeID package for generating unique IDs"
-version: 1.1.0
+version: 1.2.0
 ---
 
 [GitHub](https://github.com/grkndev/snowflake-id) | [npm](https://www.npmjs.com/package/@grkndev/snowflakeid)
-version: 1.1.0
+version: 1.2.0
 
 # Snowflake ID Generator
 
@@ -23,7 +23,7 @@ npm install @grkndev/snowflakeid
 ### JavaScript
 
 ```javascript
-const { generateSnowflakeId, parseSnowflakeId, randomId } = require('@grkndev/snowflakeid');
+const { generateSnowflakeId, parseSnowflakeId, randomId, uuid } = require('@grkndev/snowflakeid');
 
 // Generate a Snowflake ID with default options
 const id = generateSnowflakeId();
@@ -50,20 +50,20 @@ console.log(customRandomID);
 
 // Generate a random UUID with default options
 const uuId = uuid();
-console.log(uuid)
-//=> 'ABCD-EFG3-HJK8-BMS1
+console.log(uuId);
+//=> 'aBcD1234-EfGh5678-iJkL9012-MnOp3456'
 
-// Generate a random UUID with options
-const uuId = uuid(split: 6);
-console.log(uuid)
-//=> 'ABCD-EFG3-HJK8-BMS1-KSJ2-128A
+// Generate a random UUID with custom split count
+const customUuId = uuid(6);
+console.log(customUuId);
+//=> 'aBcD1234-EfGh5678-iJkL9012-MnOp3456-QrSt7890-UvWx1234'
 
 ```
 
 ### TypeScript
 
 ```typescript
-import { generateSnowflakeId, parseSnowflakeId, SnowflakeOptions, randomId, RandomIdOptions } from '@grkndev/snowflakeid';
+import { generateSnowflakeId, parseSnowflakeId, SnowflakeOptions, randomId, RandomIdOptions, uuid } from '@grkndev/snowflakeid';
 
 // Generate a Snowflake ID with default options
 const id = generateSnowflakeId();
@@ -89,11 +89,11 @@ console.log(customRandomID);
 
 // Generate a random UUID
 const uuId = uuid();
-console.log(uuid)
+console.log(uuId);
 
-// Generate a random UUID with options
-const uuId = uuid(split: 6);
-console.log(uuid)
+// Generate a random UUID with custom split count
+const customUuId = uuid(6);
+console.log(customUuId);
 ```
 
 ## API
@@ -134,6 +134,17 @@ Parameters:
 
 Returns a string representation of the generated random ID.
 
+### uuid(split?: number): string
+
+Generates a pseudo-UUID string using random alphanumeric characters.
+
+> **Note:** This is NOT a standard UUID (RFC 4122). It generates a random alphanumeric string split into segments for readability. For cryptographically secure UUIDs, use `crypto.randomUUID()` instead.
+
+Parameters:
+- `split` (optional): The number of 8-character segments to generate. Default is 4.
+
+Returns a string with segments separated by hyphens (e.g., "aBcD1234-EfGh5678-iJkL9012-MnOp3456").
+
 ## Error Handling
 
 The `generateSnowflakeId` function may throw errors in the following cases:
@@ -141,7 +152,15 @@ The `generateSnowflakeId` function may throw errors in the following cases:
 - If the provided `epoch` is a negative number or a future timestamp.
 - If the system clock moves backwards.
 
-The `randomId` function may throw an error if neither `useChars` nor `useNumbers` is set to true in the options.
+The `randomId` function may throw errors in the following cases:
+- If the provided `length` is less than 1.
+- If neither `useChars` nor `useNumbers` is set to true in the options.
+
+The `uuid` function may throw an error if the provided `split` is less than 1.
+
+## Update Notes
+
+For a detailed list of changes, improvements, and bug fixes in each version, please see the [UpdateNotes.md](./UpdateNotes.md) file.
 
 ## License
 
