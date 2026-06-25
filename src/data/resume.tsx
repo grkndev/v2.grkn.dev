@@ -262,6 +262,26 @@ export const DATA = {
   ],
   hackathons: [
     {
+      title: "Kernel Panic Bootcamp by METU Cybersecurity Society",
+      dates: "May 1st - May 3rd, 2026",
+      location: "Turkiye",
+      description:
+        "I successfully completed the Advanced Cyber Security Training organized by METU NCC Cybersecurity Society at METU KALTEV. This intensive 3-day program focused heavily on hands-on practice, covering advanced security tools and real-world scenarios.",
+      image: "",
+      mlh: "",
+      links: [],
+    },
+    {
+      title: "Europe Coding School Cybersecurity Bootcamp",
+      dates: "April 13th - May 25th, 2026",
+      location: "Turkiye",
+      description:
+        "I successfully completed the Cyber Security Specialist program at Europe Coding School, earning a Certificate of Excellence for outstanding performance. Throughout the training, I gained hands-on expertise in penetration testing, web application security, networking fundamentals, and defense strategies. I am excited to combine my software development skills with a security-first perspective.",
+      image: "",
+      mlh: "",
+      links: [],
+    },
+    {
       title: "METU Cybersecurity Society CTF Competition",
       dates: "December 4th, 2025",
       location: "Turkiye",
