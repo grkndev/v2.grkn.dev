@@ -190,6 +190,20 @@ export const DATA = {
   projects: [
     {
       hasError: true,
+      title: "Link to Mac",
+      href: "https://github.com/grkndev/LinkToMac",
+      dates: "Shared Jun 8, 2026 | Last Updated Jun 26, 2026",
+      active: true,
+      description:
+        "Link to an alternative to Windows (Phone Link) for macOS. Sync your clipboard, notifications, calls, and more between your Mac and Android devices.",
+      technologies: ["React Native", "TypeScript", "Kotlin","Swift", "Java"],
+      links: [
+      ],
+      image: "/rabelcode.png",
+      video: "",
+    },
+    {
+      hasError: true,
       title: "Snowflake Id",
       href: "https://github.com/grkndev/snowflake-id",
       dates: "Shared Sep 15, 2024 | Last Updated Oct 10, 2024",
