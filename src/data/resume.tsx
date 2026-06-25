@@ -195,7 +195,7 @@ export const DATA = {
       dates: "Shared Jun 8, 2026 | Last Updated Jun 26, 2026",
       active: true,
       description:
-        "Link to an alternative to Windows (Phone Link) for macOS. Sync your clipboard, notifications, calls, and more between your Mac and Android devices.",
+        "Link to Windows (Phone Link) alternative for macOS. Sync your clipboard, notifications, calls, and more between your Mac and Android devices.",
       technologies: ["React Native", "TypeScript", "Kotlin","Swift", "Java"],
       links: [
       ],
