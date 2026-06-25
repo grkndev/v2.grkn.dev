@@ -203,6 +203,24 @@ export const DATA = {
       video: "",
     },
     {
+      title: "ICleaner",
+      hasError: false,
+      href: "https://github.com/grkndev/icleaner",
+      dates: "Shared Mar 25, 2026 | Last Updated Mar 25, 2026",
+      active: false,
+      description: "Disk Cleaner and Optimizer for macOS",
+      technologies: [
+        "GoLang",
+        "Makefile",
+        "MacOS",
+        "Cache",
+        "TUI/CLI",
+      ],
+      links: [],
+      image: "/rabelcode.png",
+      video: "",
+    },
+    {
       hasError: true,
       title: "Snowflake Id",
       href: "https://github.com/grkndev/snowflake-id",
@@ -215,24 +233,6 @@ export const DATA = {
         {
           type: "NPM",
           href: "https://www.npmjs.com/package/@grkndev/snowflakeid",
-          icon: <Icons.globe className="size-3" />,
-        },
-      ],
-      image: "/rabelcode.png",
-      video: "",
-    },
-    {
-      title: "Mornius",
-      hasError: false,
-      href: "https://github.com/grkndev/mornius",
-      dates: "Shared Jan 31, 2024 | Last Updated Jan 31, 2024",
-      active: false,
-      description: "Easily access and use Github API service",
-      technologies: ["npm", "TypeScript", "Javascript", "Github Api"],
-      links: [
-        {
-          type: "NPM",
-          href: "https://www.npmjs.com/package/mornius",
           icon: <Icons.globe className="size-3" />,
         },
       ],
@@ -257,25 +257,8 @@ export const DATA = {
       ],
       image: "/rabelcode.png",
       video: "",
-    },
-    {
-      title: "ICleaner",
-      hasError: false,
-      href: "https://github.com/grkndev/icleaner",
-      dates: "Shared Mar 25, 2026 | Last Updated Mar 25, 2026",
-      active: false,
-      description: "Disk Cleaner and Optimizer for macOS",
-      technologies: [
-        "GoLang",
-        "Makefile",
-        "MacOS",
-        "Cache",
-        "TUI/CLI",
-      ],
-      links: [],
-      image: "/rabelcode.png",
-      video: "",
-    },
+    }
+    
   ],
   hackathons: [
     {
