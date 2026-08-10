@@ -1,9 +1,9 @@
-import { getPost } from "@/data/blog";
+import { getPackagePosts, getPost } from "@/data/blog";
 import { DATA } from "@/data/resume";
-import { extractHeadings, formatDate } from "@/lib/utils";
+import { extractHeadings } from "@/lib/utils";
+import { PostDate } from "@/components/relative-date";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -18,20 +18,29 @@ import { CopyButton } from "@/components/copy-button";
 import { Calendar, ExternalLink, Package, Github, BookOpen } from "lucide-react";
 import Link from "next/link";
 
+export async function generateStaticParams() {
+  const posts = await getPackagePosts();
+  return posts.map((post) => ({ slug: post.slug }));
+}
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
-}): Promise<Metadata | undefined> {
+}): Promise<Metadata> {
   const { slug } = await params;
-  let post = await getPost(slug, "package");
+  const post = await getPost(slug, "package");
 
-  let {
+  if (!post) {
+    return {};
+  }
+
+  const {
     title,
     publishedAt: publishedTime,
     summary: description,
   } = post.metadata;
-  let ogImage = `${DATA.url}/packages/${slug}/opengraph-image`;
+  const ogImage = `${DATA.url}/packages/${slug}/opengraph-image`;
 
   return {
     title,
@@ -64,7 +73,7 @@ export default async function PackagePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  let post = await getPost(slug, "package");
+  const post = await getPost(slug, "package");
 
   if (!post) {
     notFound();
@@ -155,12 +164,10 @@ export default async function PackagePage({
             </p>
 
             <div className="flex items-center gap-4 text-sm text-neutral-500">
-              <Suspense fallback={<span className="h-5" />}>
-                <div className="flex items-center gap-1.5">
-                  <Calendar className="w-4 h-4" />
-                  <span>{formatDate(post.metadata.publishedAt)}</span>
-                </div>
-              </Suspense>
+              <div className="flex items-center gap-1.5">
+                <Calendar className="w-4 h-4" />
+                <PostDate date={post.metadata.publishedAt} />
+              </div>
             </div>
           </div>
 

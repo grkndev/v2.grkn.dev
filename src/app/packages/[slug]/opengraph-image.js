@@ -2,6 +2,13 @@ import { ImageResponse } from "next/og";
 import { OpenGraphImage } from "@/components/og-image";
 import { getRegularFont, getBoldFont } from "@/lib/fonts";
 import { sharedTitle, sharedImage } from "@/app/shared-metadata";
+import { getPackagePosts } from "@/data/blog";
+
+export async function generateStaticParams() {
+  const posts = await getPackagePosts();
+  return posts.map((post) => ({ slug: post.slug }));
+}
+
 export const alt = `${sharedTitle} - Packages`;
 export const size = {
   width: sharedImage.width,

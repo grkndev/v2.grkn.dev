@@ -5,12 +5,11 @@ import { ResumeCard } from "@/components/resume-card";
 import { ProjectCard } from "@/components/project-card";
 import { HackathonCard } from "@/components/hackathon-card";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
 import { cn } from "@/lib/utils";
 import { DATA } from "@/data/resume";
 import { TECS } from "@/data/resume";
 
+import Image from "next/image";
 import Link from "next/link";
 import Markdown from "react-markdown";
 
@@ -36,6 +35,8 @@ const ReviewCard = ({ icon, title }: { icon: string; title: string }) => {
           width="32"
           height="32"
           alt=""
+          loading="lazy"
+          decoding="async"
           src={icon}
         />
         <div className="flex flex-col">
@@ -68,10 +69,16 @@ export default function Page() {
               />
             </div>
             <BlurFade delay={BLUR_FADE_DELAY}>
-              <Avatar className="size-28 border">
-                <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
-                <AvatarFallback>{DATA.initials}</AvatarFallback>
-              </Avatar>
+              <div className="relative size-28 shrink-0 overflow-hidden rounded-full border">
+                <Image
+                  src={DATA.avatarUrl}
+                  alt={DATA.name}
+                  fill
+                  priority
+                  sizes="112px"
+                  className="object-cover"
+                />
+              </div>
             </BlurFade>
           </div>
         </div>
@@ -120,12 +127,12 @@ export default function Page() {
             <BlurFade delay={BLUR_FADE_DELAY * 9}>
               <h2 className="text-xl font-bold">Skills</h2>
             </BlurFade>
-            <Marquee pauseOnHover className="[--duration:60s] ">
+            <Marquee repeat={2} pauseOnHover className="[--duration:60s] ">
               {firstRow.map((review) => (
                 <ReviewCard key={review.title} {...review} />
               ))}
             </Marquee>
-            <Marquee reverse pauseOnHover className="[--duration:60s]">
+            <Marquee repeat={2} reverse pauseOnHover className="[--duration:60s]">
               {secondRow.map((review) => (
                 <ReviewCard key={review.title} {...review} />
               ))}
@@ -202,16 +209,12 @@ export default function Page() {
                 <ProjectCard
                   className="h-full"
                   href={project.href}
-                  hasError={project.hasError ? project.hasError : false}
                   key={project.title}
                   title={project.title}
                   description={project.description}
                   dates={project.dates}
                   tags={project.technologies}
                   active={project.active}
-                  image={project.image}
-                  video={project.video}
-                  links={project.links}
                 />
               </BlurFade>
             ))}

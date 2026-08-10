@@ -1,11 +1,15 @@
-"use client";
-
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import BlurFade from "@/components/magicui/blur-fade";
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 import "./fonts.css";
+
+export const metadata: Metadata = {
+  title: "GrknDev Logo Guidelines",
+  description: "Official logo guidelines and assets",
+};
 
 export default function BrandingPage() {
   // Animation delay constant

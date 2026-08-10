@@ -3,120 +3,120 @@ import { Icons } from "@/components/icons";
 export const TECS = [
   {
     title: "C#",
-    icon: "https://skillicons.dev/icons?i=cs&theme=light",
+    icon: "/icons/cs.svg",
   },
   {
     title: "Python",
-    icon: "https://skillicons.dev/icons?i=python&theme=light",
+    icon: "/icons/python.svg",
   },
   {
     title: "C++",
-    icon: "https://skillicons.dev/icons?i=cpp&theme=light",
+    icon: "/icons/cpp.svg",
   },
   {
     title: "Arduino",
-    icon: "https://skillicons.dev/icons?i=arduino&theme=light",
+    icon: "/icons/arduino.svg",
   },
   {
     title: "Go",
-    icon: "https://skillicons.dev/icons?i=go&theme=light",
+    icon: "/icons/go.svg",
   },
 
   {
     title: "JavaScript",
-    icon: "https://skillicons.dev/icons?i=js&theme=light",
+    icon: "/icons/js.svg",
   },
   {
     title: "TypeScript",
-    icon: "https://skillicons.dev/icons?i=typescript&theme=light",
+    icon: "/icons/typescript.svg",
   },
   {
     title: "Node.js",
-    icon: "https://skillicons.dev/icons?i=nodejs&theme=light",
+    icon: "/icons/nodejs.svg",
   },
   {
     title: "React",
-    icon: "https://skillicons.dev/icons?i=react&theme=light",
+    icon: "/icons/react.svg",
   },
   {
     title: "React Native",
-    icon: "https://skillicons.dev/icons?i=react&theme=light",
+    icon: "/icons/react.svg",
   },
   {
     title: "Next.js",
-    icon: "https://skillicons.dev/icons?i=nextjs&theme=light",
+    icon: "/icons/nextjs.svg",
   },
   {
     title: "Express",
-    icon: "https://skillicons.dev/icons?i=express&theme=light",
+    icon: "/icons/express.svg",
   },
 
   {
     title: "MongoDB",
-    icon: "https://skillicons.dev/icons?i=mongodb&theme=light",
+    icon: "/icons/mongodb.svg",
   },
   {
     title: "MySQL",
-    icon: "https://skillicons.dev/icons?i=mysql&theme=light",
+    icon: "/icons/mysql.svg",
   },
   {
     title: "Firebase",
-    icon: "https://skillicons.dev/icons?i=firebase&theme=light",
+    icon: "/icons/firebase.svg",
   },
   {
     title: "PostgreSQL",
-    icon: "https://skillicons.dev/icons?i=postgresql&theme=light",
+    icon: "/icons/postgresql.svg",
   },
   {
     title: "GraphQL",
-    icon: "https://skillicons.dev/icons?i=graphql&theme=light",
+    icon: "/icons/graphql.svg",
   },
 
   {
     title: "HTML",
-    icon: "https://skillicons.dev/icons?i=html&theme=light",
+    icon: "/icons/html.svg",
   },
   {
     title: "CSS",
-    icon: "https://skillicons.dev/icons?i=css&theme=light",
+    icon: "/icons/css.svg",
   },
   {
     title: "Tailwind CSS",
-    icon: "https://skillicons.dev/icons?i=tailwindcss&theme=light",
+    icon: "/icons/tailwindcss.svg",
   },
 
   {
     title: "Git",
-    icon: "https://skillicons.dev/icons?i=git&theme=light",
+    icon: "/icons/git.svg",
   },
   {
     title: "Figma",
-    icon: "https://skillicons.dev/icons?i=figma&theme=light",
+    icon: "/icons/figma.svg",
   },
   {
     title: "Photoshop",
-    icon: "https://skillicons.dev/icons?i=ps&theme=light",
+    icon: "/icons/ps.svg",
   },
   {
     title: "After Effects",
-    icon: "https://skillicons.dev/icons?i=ae&theme=light",
+    icon: "/icons/ae.svg",
   },
   {
     title: "Premiere Pro",
-    icon: "https://skillicons.dev/icons?i=pr&theme=light",
+    icon: "/icons/pr.svg",
   },
 
   {
     title: "Docker",
-    icon: "https://skillicons.dev/icons?i=docker&theme=light",
+    icon: "/icons/docker.svg",
   },
   {
     title: "Kubernetes",
-    icon: "https://skillicons.dev/icons?i=kubernetes&theme=light",
+    icon: "/icons/kubernetes.svg",
   },
   {
     title: "AWS",
-    icon: "https://skillicons.dev/icons?i=aws&theme=light",
+    icon: "/icons/aws.svg",
   },
 ] as const;
 export const DATA = {

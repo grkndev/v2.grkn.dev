@@ -7,12 +7,11 @@ import type { Metadata } from "next";
 import { Montserrat as FontSans } from "next/font/google";
 import "./globals.css";
 import GoogleAdsense from "@/components/Google/GoogleAdsense";
-import { PageLoadingProvider } from "@/components/page-loading-provider";
-import { DotPattern } from "@/components/magicui/dot-pattern";
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -138,10 +137,8 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark">
 
           <TooltipProvider delayDuration={0}>
-            <PageLoadingProvider>
-              <Navbar />
-              {children}
-            </PageLoadingProvider>
+            <Navbar />
+            {children}
           </TooltipProvider>
         </ThemeProvider>
 

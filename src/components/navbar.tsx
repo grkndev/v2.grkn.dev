@@ -11,7 +11,6 @@ import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import { HomeIcon, NotebookIcon, PackageIcon } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import GDevIcon from "./Icons/gdev";
 export default function Navbar() {
   return (
