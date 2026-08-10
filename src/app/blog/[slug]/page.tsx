@@ -171,6 +171,14 @@ export default async function Blog({
           <article className="prose dark:prose-invert prose-headings:scroll-mt-20 max-w-none">
             {content}
           </article>
+
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-1.5 mt-10 pt-6 border-t border-neutral-200 dark:border-neutral-800 text-sm text-neutral-500 hover:text-blue-500 dark:text-neutral-400 dark:hover:text-blue-400 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Blog&apos;a Dön
+          </Link>
         </div>
         <div className="hidden lg:block">
           <TocSidebar headings={headings} />

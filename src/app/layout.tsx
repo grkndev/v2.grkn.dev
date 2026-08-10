@@ -1,5 +1,6 @@
 import Navbar from "@/components/navbar";
 import { PageHeader } from "@/components/page-header";
+import { ScrollToTop } from "@/components/scroll-to-top";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
@@ -140,7 +141,8 @@ export default function RootLayout({
           <TooltipProvider delayDuration={0}>
             <Navbar />
             <PageHeader />
-            <div className="max-w-5xl mx-auto py-12 sm:py-24 px-6">
+            <ScrollToTop />
+            <div className="max-w-5xl mx-auto pt-12 sm:pt-24 pb-28 sm:pb-24 px-6">
               {children}
             </div>
           </TooltipProvider>

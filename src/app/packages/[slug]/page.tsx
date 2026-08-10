@@ -15,7 +15,7 @@ import {
 import { TocSidebar } from "@/components/toc-sidebar";
 import { Badge } from "@/components/ui/badge";
 import { CopyButton } from "@/components/copy-button";
-import { Calendar, ExternalLink, Package, Github, BookOpen } from "lucide-react";
+import { ArrowLeft, Calendar, ExternalLink, Package, Github, BookOpen } from "lucide-react";
 import Link from "next/link";
 
 export async function generateStaticParams() {
@@ -82,12 +82,23 @@ export default async function PackagePage({
   // Extract headings from the content
   const headings = extractHeadings(post.source);
 
-  // Add IDs to all headings in the HTML content
-  let contentWithIds = post.source;
-  headings.forEach(({ id, text }) => {
-    const regex = new RegExp(`<h([1-6])[^>]*>(${text})<\/h\\1>`, "g");
-    contentWithIds = contentWithIds.replace(regex, `<h$1 id="${id}">$2</h$1>`);
-  });
+  // Inject the extracted ids back into the HTML by position, so headings
+  // that repeat the same text (e.g. "Example Usage" per function) each
+  // get their own unique id instead of colliding on the first match.
+  const headingMatches = Array.from(
+    post.source.matchAll(/<h([1-6])([^>]*)>(.*?)<\/h\1>/g)
+  );
+  const idByOffset = new Map(
+    headingMatches.map((m, i) => [m.index, headings[i]?.id])
+  );
+  const contentWithIds = post.source.replace(
+    /<h([1-6])([^>]*)>(.*?)<\/h\1>/g,
+    (match, level, attrs, inner, offset) => {
+      const id = idByOffset.get(offset);
+      if (!id) return match;
+      return `<h${level}${attrs} id="${id}">${inner}</h${level}>`;
+    }
+  );
 
   const installCommand = `npm install @grkndev/${slug}`;
 
@@ -233,6 +244,14 @@ export default async function PackagePage({
             className="prose prose-neutral dark:prose-invert prose-headings:scroll-mt-20 prose-pre:bg-neutral-900 prose-pre:border prose-pre:border-neutral-800 max-w-none"
             dangerouslySetInnerHTML={{ __html: contentWithIds }}
           />
+
+          <Link
+            href="/packages"
+            className="inline-flex items-center gap-1.5 mt-10 pt-6 border-t border-neutral-200 dark:border-neutral-800 text-sm text-neutral-500 hover:text-red-500 dark:text-neutral-400 dark:hover:text-red-400 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Packages&apos;a Dön
+          </Link>
         </div>
 
         {/* Desktop Sidebar */}
