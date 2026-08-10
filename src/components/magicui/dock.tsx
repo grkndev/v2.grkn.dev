@@ -2,7 +2,7 @@
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import { motion, MotionValue, useMotionValue, useSpring, useTransform } from "motion/react";
-import React, { createContext, useContext, useRef } from "react";
+import React, { createContext, useContext, useEffect, useRef, useState } from "react";
 
 export interface DockProps extends VariantProps<typeof dockVariants> {
   className?: string;
@@ -48,11 +48,28 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
   ) => {
     const mouseX = useMotionValue(Infinity);
 
+    // Magnification is a mouse-proximity effect: it only makes sense on
+    // devices with a real hover-capable pointer. On touch, the same tap
+    // that triggers navigation would also fire a synthetic mousemove with
+    // no matching mouseleave, leaving the icon magnified indefinitely.
+    const [canHover, setCanHover] = useState(false);
+
+    useEffect(() => {
+      const query = window.matchMedia("(hover: hover) and (pointer: fine)");
+      setCanHover(query.matches);
+      const handleChange = (e: MediaQueryListEvent) => {
+        setCanHover(e.matches);
+        if (!e.matches) mouseX.set(Infinity);
+      };
+      query.addEventListener("change", handleChange);
+      return () => query.removeEventListener("change", handleChange);
+    }, [mouseX]);
+
     return (
       <DockContext.Provider value={{ mouseX, magnification, distance }}>
         <motion.div
           ref={ref}
-          onMouseMove={(e) => mouseX.set(e.pageX)}
+          onMouseMove={(e) => canHover && mouseX.set(e.pageX)}
           onMouseLeave={() => mouseX.set(Infinity)}
           {...props}
           className={cn(dockVariants({ className }))}
