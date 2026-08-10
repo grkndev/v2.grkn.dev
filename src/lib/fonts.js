@@ -1,3 +1,4 @@
+import { readFile } from 'fs/promises'
 import { cache } from 'react'
 import 'server-only'
 
@@ -7,9 +8,8 @@ import 'server-only'
  * @returns A Promise resolving to the regular font file as an array buffer.
  */
 export const getRegularFont = cache(async () => {
-  const response = await fetch(new URL('@/assets/fonts/Geist-Regular.otf', import.meta.url))
-  const font = await response.arrayBuffer()
-  return font
+  const buffer = await readFile(new URL('../assets/fonts/Geist-Regular.otf', import.meta.url))
+  return buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength)
 })
 
 /**
@@ -18,9 +18,8 @@ export const getRegularFont = cache(async () => {
  * @returns A Promise resolving to the bold font file as an array buffer.
  */
 export const getBoldFont = cache(async () => {
-  const response = await fetch(new URL('@/assets/fonts/Geist-Medium.otf', import.meta.url))
-  const font = await response.arrayBuffer()
-  return font
+  const buffer = await readFile(new URL('../assets/fonts/Geist-Medium.otf', import.meta.url))
+  return buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength)
 })
 
 /**
@@ -29,7 +28,6 @@ export const getBoldFont = cache(async () => {
  * @returns A Promise resolving to the quantify font file as an array buffer.
  */
 export const getQuantifyFont = cache(async () => {
-  const response = await fetch(new URL('@/assets/fonts/Quantify.ttf', import.meta.url))
-  const font = await response.arrayBuffer()
-  return font
+  const buffer = await readFile(new URL('../assets/fonts/Quantify.ttf', import.meta.url))
+  return buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength)
 })

@@ -4,7 +4,6 @@ import { OpenGraphImage } from '@/components/og-image'
 import { getRegularFont, getBoldFont, getQuantifyFont } from '@/lib/fonts'
 import { sharedTitle, sharedDescription, sharedImage } from '@/app/shared-metadata'
 
-export const runtime = 'edge'
 export const alt = sharedTitle
 export const size = {
   width: sharedImage.width,
