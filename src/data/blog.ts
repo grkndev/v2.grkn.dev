@@ -8,12 +8,17 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
 
+import { estimateReadingMinutes } from "@/lib/utils";
+
 type Metadata = {
   title: string;
   publishedAt: string;
   summary: string;
   image?: string;
   version?: string;
+  tags?: string[];
+  updatedAt?: string;
+  draft?: boolean;
 };
 
 type PostType = "blog" | "package";
@@ -52,12 +57,19 @@ export async function markdownToHTML(markdown: string) {
   return p.toString();
 }
 
+function isHiddenDraft(metadata: Metadata) {
+  return metadata.draft && process.env.NODE_ENV === "production";
+}
+
 export const getPost = cache(async (slug: string, type: PostType) => {
   const source = readPostFile(slug, type);
   if (source === null) {
     return null;
   }
   const { content: rawContent, data: metadata } = matter(source);
+  if (isHiddenDraft(metadata as Metadata)) {
+    return null;
+  }
   const content = await markdownToHTML(rawContent);
   return {
     source: content,
@@ -71,9 +83,13 @@ export const getPostMetadata = cache(async (slug: string, type: PostType) => {
   if (source === null) {
     return null;
   }
-  const { data: metadata } = matter(source);
+  const { content: rawContent, data: metadata } = matter(source);
+  if (isHiddenDraft(metadata as Metadata)) {
+    return null;
+  }
   return {
     metadata: metadata as Metadata,
+    readingMinutes: estimateReadingMinutes(rawContent),
     slug,
   };
 });

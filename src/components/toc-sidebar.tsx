@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { ChevronDown, ChevronUp, List, Circle } from "lucide-react";
 
-interface PackageSidebarProps {
+interface TocSidebarProps {
   headings: Array<{
     id: string;
     text: string;
@@ -12,7 +12,7 @@ interface PackageSidebarProps {
   }>;
 }
 
-export function PackageSidebar({ headings }: PackageSidebarProps) {
+export function TocSidebar({ headings }: TocSidebarProps) {
   const [activeId, setActiveId] = useState<string>("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -62,7 +62,7 @@ export function PackageSidebar({ headings }: PackageSidebarProps) {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      if (!target.closest(".package-sidebar-mobile") && isMobileMenuOpen) {
+      if (!target.closest(".toc-sidebar-mobile") && isMobileMenuOpen) {
         setIsMobileMenuOpen(false);
       }
     };
@@ -160,7 +160,7 @@ export function PackageSidebar({ headings }: PackageSidebarProps) {
       </div>
 
       {/* Mobile Dropdown */}
-      <div className="lg:hidden w-full package-sidebar-mobile">
+      <div className="lg:hidden w-full toc-sidebar-mobile">
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="flex items-center justify-between w-full p-4 bg-neutral-100 dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 transition-all hover:border-neutral-300 dark:hover:border-neutral-700"

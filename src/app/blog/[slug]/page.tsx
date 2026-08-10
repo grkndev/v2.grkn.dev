@@ -1,6 +1,18 @@
-import { getBlogPosts, getPost } from "@/data/blog";
+import { getBlogPosts, getPostMetadata } from "@/data/blog";
+import { getBlogPostContent } from "@/data/blog-content";
 import { DATA } from "@/data/resume";
 import { PostDate } from "@/components/relative-date";
+import { TocSidebar } from "@/components/toc-sidebar";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { Badge } from "@/components/ui/badge";
+import { Clock } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -15,7 +27,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPost(slug, "blog");
+  const post = await getPostMetadata(slug, "blog");
 
   if (!post) {
     return {};
@@ -27,24 +39,28 @@ export async function generateMetadata({
     summary: description,
     image,
   } = post.metadata;
-  const ogImage = image ? `${DATA.url}${image}` : undefined;
+  const url = `${DATA.url}/blog/${slug}`;
+  const ogImage = image ? `${DATA.url}${image}` : `${DATA.url}/blog/${slug}/opengraph-image`;
 
   return {
     title,
     description,
+    alternates: {
+      canonical: url,
+    },
     openGraph: {
       title,
       description,
       type: "article",
       publishedTime,
-      url: `${DATA.url}/blog/${post.slug}`,
-      ...(ogImage ? { images: [{ url: ogImage }] } : {}),
+      url,
+      images: [{ url: ogImage }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      ...(ogImage ? { images: [ogImage] } : {}),
+      images: [ogImage],
     },
   };
 }
@@ -55,11 +71,19 @@ export default async function Blog({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = await getPost(slug, "blog");
+  const [post, compiled] = await Promise.all([
+    getPostMetadata(slug, "blog"),
+    getBlogPostContent(slug),
+  ]);
 
-  if (!post) {
+  if (!post || !compiled) {
     notFound();
   }
+
+  const { metadata, readingMinutes } = post;
+  const { content, headings } = compiled;
+  const url = `${DATA.url}/blog/${slug}`;
+  const ogImage = metadata.image ? `${DATA.url}${metadata.image}` : `${url}/opengraph-image`;
 
   return (
     <section id="blog">
@@ -67,37 +91,82 @@ export default async function Blog({
         type="application/ld+json"
         suppressHydrationWarning
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            headline: post.metadata.title,
-            datePublished: post.metadata.publishedAt,
-            dateModified: post.metadata.publishedAt,
-            description: post.metadata.summary,
-            image: post.metadata.image
-              ? `${DATA.url}${post.metadata.image}`
-              : `${DATA.url}/opengraph-image`,
-            url: `${DATA.url}/blog/${post.slug}`,
-            author: {
-              "@type": "Person",
-              name: DATA.name,
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "BlogPosting",
+              headline: metadata.title,
+              datePublished: metadata.publishedAt,
+              dateModified: metadata.updatedAt ?? metadata.publishedAt,
+              description: metadata.summary,
+              image: ogImage,
+              url,
+              author: {
+                "@type": "Person",
+                name: DATA.name,
+              },
             },
-          }),
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: DATA.url },
+                { "@type": "ListItem", position: 2, name: "Blog", item: `${DATA.url}/blog` },
+                { "@type": "ListItem", position: 3, name: metadata.title, item: url },
+              ],
+            },
+          ]),
         }}
       />
+
+      <Breadcrumb className="mb-6">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/blog">Blog</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>{metadata.title}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+
       <h1 className="title font-medium text-2xl tracking-tighter max-w-[650px]">
-        {post.metadata.title}
+        {metadata.title}
       </h1>
-      <div className="flex justify-between items-center mt-2 mb-8 text-sm max-w-[650px]">
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-2 mb-8 text-sm max-w-[650px]">
         <PostDate
-          date={post.metadata.publishedAt}
+          date={metadata.publishedAt}
           className="text-sm text-neutral-600 dark:text-neutral-400"
         />
+        <span className="flex items-center gap-1 text-neutral-500 dark:text-neutral-500">
+          <Clock className="w-3.5 h-3.5" />
+          {readingMinutes} dk okuma
+        </span>
+        {metadata.tags?.map((tag) => (
+          <Badge key={tag} variant="secondary" className="text-xs">
+            {tag}
+          </Badge>
+        ))}
       </div>
-      <article
-        className="prose dark:prose-invert"
-        dangerouslySetInnerHTML={{ __html: post.source }}
-      ></article>
+
+      <div className="flex flex-col lg:flex-row lg:gap-12">
+        <div className="flex-1 min-w-0">
+          <div className="lg:hidden mb-6">
+            <TocSidebar headings={headings} />
+          </div>
+          <article className="prose dark:prose-invert prose-headings:scroll-mt-20 max-w-none">
+            {content}
+          </article>
+        </div>
+        <div className="hidden lg:block">
+          <TocSidebar headings={headings} />
+        </div>
+      </div>
     </section>
   );
 }

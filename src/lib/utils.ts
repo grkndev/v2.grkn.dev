@@ -14,6 +14,11 @@ export function formatDate(date: string) {
   });
 }
 
+export function estimateReadingMinutes(text: string) {
+  const words = text.trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(words / 200));
+}
+
 export function extractHeadings(html: string) {
   const headingRegex = /<h([1-6])[^>]*>(.*?)<\/h\1>/g;
   const headings: { id: string; text: string; level: number }[] = [];

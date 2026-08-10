@@ -12,7 +12,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { PackageSidebar } from "@/components/package-sidebar";
+import { TocSidebar } from "@/components/toc-sidebar";
 import { Badge } from "@/components/ui/badge";
 import { CopyButton } from "@/components/copy-button";
 import { Calendar, ExternalLink, Package, Github, BookOpen } from "lucide-react";
@@ -217,7 +217,7 @@ export default async function PackagePage({
         <div className="flex-1 min-w-0">
           {/* Mobile TOC */}
           <div className="lg:hidden mb-6">
-            <PackageSidebar headings={headings} />
+            <TocSidebar headings={headings} />
           </div>
 
           {/* Documentation Header */}
@@ -237,7 +237,7 @@ export default async function PackagePage({
 
         {/* Desktop Sidebar */}
         <div className="hidden lg:block">
-          <PackageSidebar headings={headings} />
+          <TocSidebar headings={headings} />
         </div>
       </div>
     </section>
