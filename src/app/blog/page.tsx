@@ -1,5 +1,5 @@
 import BlurFade from "@/components/magicui/blur-fade";
-import { BlogCard } from "@/components/blog-card";
+import { BlogPostList } from "@/components/blog-post-list";
 import { getBlogPosts } from "@/data/blog";
 import {
   Breadcrumb,
@@ -26,11 +26,6 @@ const BLUR_FADE_DELAY = 0.04;
 
 export default async function BlogPage() {
   const posts = await getBlogPosts();
-  const sortedPosts = posts.sort(
-    (a, b) =>
-      new Date(b.metadata.publishedAt).getTime() -
-      new Date(a.metadata.publishedAt).getTime()
-  );
 
   return (
     <section className="min-h-screen">
@@ -57,7 +52,7 @@ export default async function BlogPage() {
                 Blog
               </h1>
               <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                {sortedPosts.length} {sortedPosts.length === 1 ? "post" : "posts"}
+                {posts.length} {posts.length === 1 ? "post" : "posts"}
               </p>
             </div>
           </div>
@@ -71,32 +66,7 @@ export default async function BlogPage() {
         </div>
       </BlurFade>
 
-      {sortedPosts.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {sortedPosts.map((post, id) => (
-            <BlurFade delay={BLUR_FADE_DELAY * 2 + id * 0.05} key={post.slug}>
-              <BlogCard
-                title={post.metadata.title}
-                summary={post.metadata.summary}
-                publishedAt={post.metadata.publishedAt}
-                readingMinutes={post.readingMinutes}
-                tags={post.metadata.tags}
-                slug={post.slug}
-              />
-            </BlurFade>
-          ))}
-        </div>
-      ) : (
-        <BlurFade delay={BLUR_FADE_DELAY * 2}>
-          <div className="text-center py-12">
-            <Notebook className="w-12 h-12 mx-auto text-neutral-300 dark:text-neutral-700 mb-4" />
-            <p className="text-neutral-500 font-medium">Yakında burada yazılar olacak.</p>
-            <p className="text-neutral-400 text-sm mt-1">
-              Yazılım geliştirme üzerine düşüncelerimi paylaşmaya yakında başlıyorum.
-            </p>
-          </div>
-        </BlurFade>
-      )}
+      <BlogPostList posts={posts} />
     </section>
   );
 }

@@ -129,7 +129,7 @@ export default function RootLayout({
       </head>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased max-w-5xl mx-auto py-12 sm:py-24 px-6",
+          "min-h-screen bg-background font-sans antialiased",
           fontSans.variable
         )}
       >
@@ -138,7 +138,9 @@ export default function RootLayout({
 
           <TooltipProvider delayDuration={0}>
             <Navbar />
-            {children}
+            <div className="max-w-5xl mx-auto py-12 sm:py-24 px-6">
+              {children}
+            </div>
           </TooltipProvider>
         </ThemeProvider>
 

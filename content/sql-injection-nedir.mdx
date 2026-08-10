@@ -1,0 +1,117 @@
+---
+title: "SQL Injection Nedir? Web Uygulamalarındaki Sessiz Tehlike"
+publishedAt: "2025-12-25"
+summary: "SQL Injection'ın ne olduğu, nasıl çalıştığı, en yaygın türleri ve parametreli sorgular, ORM kullanımı ve en az yetki prensibi gibi yöntemlerle nasıl önlenebileceği üzerine temel düzeyde bir inceleme."
+tags: ["Cyber Security", "SQL Injection", "OWASP", "Web"]
+---
+
+Günümüzde web uygulamaları; kullanıcı girişleri, formlar, arama kutuları ve API istekleri aracılığıyla sürekli olarak veri alır ve bu verileri veritabanlarıyla etkileşime sokar. İşte bu noktada, **SQL Injection (SQL Enjeksiyonu)** adı verilen kritik bir güvenlik açığı ortaya çıkabilir. SQL Injection, saldırganın uygulamanın beklemediği şekilde **SQL komutları çalıştırmasını** sağlayan bir zafiyettir ve doğru önlem alınmadığında ciddi veri ihlallerine yol açabilir.
+
+Bu yazıda SQL Injection'ın ne olduğunu, nasıl çalıştığını, neden bu kadar tehlikeli olduğunu ve nasıl önlenebileceğini temel düzeyde ele alacağız.
+
+## SQL Injection Nedir?
+
+SQL Injection, kullanıcıdan alınan girdilerin yeterince doğrulanmadan veya filtrelenmeden doğrudan SQL sorgularına eklenmesi sonucu ortaya çıkan bir güvenlik açığıdır. Bu açık sayesinde saldırgan, uygulamanın arka planda çalıştırdığı SQL sorgusunu manipüle edebilir.
+
+Basitçe ifade etmek gerekirse:
+
+*Uygulama, kullanıcıdan aldığı veriyi sorgunun bir parçası sanır; saldırgan ise bunu bir SQL komutu olarak kullanır.*
+
+## SQL Injection Nasıl Çalışır?
+
+Bir web uygulamasının giriş ekranı olduğunu düşünelim. Kullanıcı adı ve şifre alınıyor ve veritabanında şu tarz bir sorgu çalıştırılıyor:
+
+```sql
+SELECT * FROM users WHERE username = 'admin' AND password = '123456';
+```
+
+Eğer uygulama, kullanıcıdan gelen girdiyi doğrudan bu sorguya ekliyorsa, saldırgan şu şekilde bir giriş yapabilir:
+
+- Kullanıcı adı: `admin' --`
+- Şifre: herhangi bir şey
+
+Oluşan SQL sorgusu şu hale gelir:
+
+```sql
+SELECT * FROM users WHERE username = 'admin' -- ' AND password = 'x';
+```
+
+`--` ifadesi SQL'de yorum satırı anlamına gelir. Bu da şifre kontrolünün tamamen devre dışı kalmasına neden olur. Sonuç olarak saldırgan, **şifreyi bilmeden sisteme giriş yapabilir.**
+
+## SQL Injection Türleri
+
+SQL Injection tek tip bir saldırı değildir. En yaygın türler şunlardır:
+
+### Classic (In-Band) SQL Injection
+
+Saldırgan, hataları veya sonuçları doğrudan uygulama ekranında görür. En kolay fark edilen ama hâlâ çok yaygın olan türdür.
+
+### Blind SQL Injection
+
+Uygulama hata mesajı vermez. Saldırgan, true/false cevaplar veya sayfanın davranışına bakarak veritabanı hakkında bilgi toplar.
+
+### Time-Based Blind SQL Injection
+
+Sorguya bilinçli gecikmeler eklenir (`SLEEP(5)` gibi). Sayfa geç açılıyorsa, saldırgan doğru yolda olduğunu anlar.
+
+### Out-of-Band SQL Injection
+
+Veri, DNS veya HTTP istekleri gibi farklı kanallar üzerinden dışarı sızdırılır. Daha karmaşık ama etkilidir.
+
+## SQL Injection Neden Bu Kadar Tehlikelidir?
+
+SQL Injection yalnızca bir "login bypass" yöntemi değildir. Başarılı bir saldırı sonucunda:
+
+- Kullanıcı adları ve şifreler çalınabilir
+- Kredi kartı ve kişisel veriler sızdırılabilir
+- Veritabanı tamamen silinebilir
+- Yetkisiz admin hesapları oluşturulabilir
+- Sunucu üzerinde ek saldırılar başlatılabilir
+
+<Callout type="warning">
+  Bu nedenle SQL Injection, **OWASP Top 10** listesinde yıllardır üst sıralarda yer almaktadır.
+</Callout>
+
+## SQL Injection'a Karşı Nasıl Önlem Alınır?
+
+SQL Injection tamamen önlenebilir bir zafiyettir. Aşağıdaki yöntemler birlikte kullanıldığında riski neredeyse sıfıra indirir:
+
+### 1. Parametreli Sorgular (Prepared Statements)
+
+Kullanıcı girdileri asla sorgu string'ine doğrudan eklenmemelidir.
+
+```sql
+SELECT * FROM users WHERE username = ? AND password = ?;
+```
+
+### 2. ORM Kullanımı
+
+Sequelize, Prisma, TypeORM gibi ORM araçları doğru kullanıldığında SQL Injection riskini büyük ölçüde azaltır.
+
+### 3. Girdi Doğrulama (Input Validation)
+
+Beklenmeyen karakterler (`'`, `"`, `--`, `;`) kontrol edilmelidir.
+
+### 4. En Az Yetki Prensibi
+
+Veritabanı kullanıcıları sadece ihtiyaç duydukları yetkilere sahip olmalıdır. `DROP TABLE` yetkisi çoğu uygulama için gereksizdir.
+
+### 5. Hata Mesajlarını Gizlemek
+
+SQL hataları kullanıcıya gösterilmemeli, loglar sunucu tarafında tutulmalıdır.
+
+## Sonuç
+
+SQL Injection, web uygulamalarında yapılan en eski ama hâlâ en tehlikeli güvenlik hatalarından biridir. Basit bir kodlama hatası, milyonlarca kaydın sızdırılmasına neden olabilir. Bu nedenle güvenli yazılım geliştirme sürecinde SQL Injection farkındalığı temel bir gerekliliktir.
+
+<Callout type="tip">
+  Eğer bir geliştiriciysen, **"çalışıyor mu?"** sorusu kadar **"güvenli mi?"** sorusunu da sormak zorundasın.
+</Callout>
+
+## İlgili Kaynaklar
+
+Mehmet İnce (mdisec) hocamın bu konularla ilgili onlarca videosu var, gerçek dünyadan bir kaç video izlemek isterseniz linklere bakabilirsiniz.
+
+- [(MDISEC YOUTUBE) Geliştiricilerin %99'u Bu Güvenlik Açığını Kodda Fark Edemiyor — Siz Görebilecek misiniz?](https://www.youtube.com/watch?v=Owz-1fRV4bo)
+- [(MDISEC YOUTUBE) Saldırgan gözünden ORM katmanı ve yaraticılığın önemi | Django CVE-2025-64459 Analizi](https://youtu.be/78e6n02mkYM)
+- [(MDISEC YOUTUBE) SQL Injection Gerçekte Nasıl Engelleniyor? ORM kullanmak her zaman güvenli mi?](https://youtu.be/x3He68p6b1E)

@@ -1,0 +1,71 @@
+---
+title: "Bilgisayarların En Büyük Yalanı: Rastgelelik"
+publishedAt: "2025-04-04"
+summary: "Bilgisayarların neden gerçekten rastgele sayı üretemediği, seed ve PRNG/CSPRNG kavramları, ve kuantum fiziğinden Cloudflare'in lav lambalarına kadar gerçek rastgelelik (TRNG) kaynaklarının nasıl çalıştığı üzerine bir inceleme."
+tags: ["Computer Science", "Cryptography", "Security"]
+---
+
+Oyundayken haritada tesadüfen bulduğunuz bir loot, ya da bir web sitesine kayıt olurken bastığınız "şifre üret" butonu veya Google'a 'bana 1-10 arasında bir sayı üret' dediğinizde gelen sonuç, bütün bunlar rastgele mi? Yoksa arka planda çalışan matematiksel bir formülün sonucu mu?
+
+## Peki Ya Rastgelelik Nedir?
+
+Rastgelelik, bir değerin ortaya çıkmadan önce asla bilinememesidir. Yani gerçek anlamda belirsizliktir.
+
+Bilgisayarlar deterministik sistemlerdir yani her seferinde aynı girdi, her seferinde aynı sonuç demektir. Bu yüzden doğası gereği belirsiz olamazlar.
+
+Bunu şu şekilde açıklayalım: Kurmalı bir müzik kutumuz olsun. Silindire hangi notalar işlendiyse, müzik kutusu her çalıştığında o notalar çalacak durup dururken "*yaa bugünde bi caz çalayım da kalite duysunlar.*" demeyecek :D.
+
+Bilgisayarlarda aynen böyledir, hiçbir zaman rastgele değerler üretemezler. Bu yüzden '*rastgeleymiş*' gibi davranırlar.
+
+Rastgelelik yoksa bu değerler nasıl oluşuyor? Bunu anlamak için "seed" kavramına bakalım.
+
+## Rastgelelik Formülü: Seed
+
+Bilgisayar kendi kendine rastgelelik üretemediği için ona dışarıdan bir başlangıç noktası vermemiz gerekir. İşte bilgisayardaki karmaşık matematiksel formüllerin hesaplama yapmaya başladığı bu ilk değere **Seed** (Tohum) denir. 🌱
+
+Bir **Sözde Rastgele Sayı Üreteci (PRNG)** algoritmasını çok karmaşık bir hesap makinesi gibi düşünebiliriz. Makinenin içindeki çarklar (algoritma) çok karışıktır ama tamamen kurallara bağlı çalışır. Eğer bu makineye aynı tohum değerini verirsek, işlem sonunda bize her zaman birebir aynı sayı dizisini verir. Bu yüzden bilgisayarın her seferinde farklı ve rastgele "görünen" sayılar üretebilmesi için sürekli değişen yeni tohumlara ihtiyacı vardır.
+
+Peki bilgisayar bu tohumu nereden bulur? Genellikle o an sistemde sürekli değişen dinamik verilerden yararlanır:
+
+- **Sistem Saati (Zaman damgası):** En eski ve en yaygın yöntemlerden biridir. İşletim sisteminin o anki saati milisaniye cinsinden (örneğin 1 Ocak 1970'ten bu yana geçen milisaniye süresi - Unix Epoch) alınarak formüle tohum olarak verilir. ⏱️
+- **Kullanıcı ve Sistem Etkileşimleri:** Fare imlecini ekranda hangi pikseller arasında gezdirdiğin, klavyedeki tuşlara basarken araya giren milisaniyelik gecikmeler veya işlemcinin anlık sıcaklık değerleri arka planda toplanarak benzersiz bir tohum oluşturulabilir. 🖱️
+
+![Sabit ve rastgele seed ile Python'da sayı üretimi örneği](/blog/randomness-seed-example.png)
+
+Bu görselde *python3.14.3* kullanarak rastgele bir sayı üretiyoruz. Görebileceğiniz üzere soldaki kodda sabit bir seed değeri kullanılarak her seferinde aynı değeri alınması sağlanırken sağdaki kodda başka sayılar oluşmakta. Yani bu kodu 100 kere de çalıştırsanız, bilgisayarınızı kapatıp açsanız da sonuç asla değişmeyecektir. Eğer kullanılan formül ve başlangıç tohumu biliniyorsa, üretilecek bir sonraki sayıyı tahmin etmek sihir değil, sadece matematiktir.
+
+<Callout type="warning">
+  Seed'in güvenli ve tahmin edilemez olması çok önemlidir, neden mi? Bir hesabınızın olduğu bir web sitesi düşünelim, bir hacker sizin e-posta bilginizi kullanarak şifre sıfırlama isteği gönderdi ve mail adresinize bir kod geldi. Eğer bu kodu üreten rastgele methodunun seed'i güçlü değilse (mesela sadece zaman damgası kullandığını düşünelim) bu durumda hacker, isteğin ne zaman gönderildiğini bilebileceği için kendisi matematiği kullanarak bu kodu üretebilir ve şifrenizi değiştirebilir. Veya o anda üretilen rastgele bir token ele geçirilebilir.
+</Callout>
+
+## Peki Bundan Nasıl Korunabiliriz?
+
+Eğer sıradan bir PRNG kullanıyorsak ve seed değeri zayıfsa, sistemimiz her zaman tehlikededir. Bunun yerine siber güvenlikte **CSPRNG** (Kriptografik Olarak Güvenli Sözde Rastgele Sayı Üreteci) adı verilen özel algoritmalar kullanılır. Bu sistemler seed değerini oluştururken işletim sisteminin derinliklerinden beslenir: İşlemci ısısındaki mikro dalgalanmalar, ağ paketlerinin varış süreleri, disk okuma/yazma hızlarındaki sapmalar ve donanım gürültüsü (Entropy Pool) bir araya getirilir. Bu sayede iyi bir CSPRNG sistemde, sadece seed tahmin edilemez olmakla kalmaz; saldırgan üretilen son 100 rastgele token'ı ele geçirse bile, algoritmanın doğası gereği 101. token'ı asla tahmin edemez.
+
+> Peki gerçek dünya bu sorunu nasıl çözüyor?
+
+## Gerçek Rastgelelik: True Random Number Generator (TRNG)
+
+Eğer gerçekten rastgele bir değer üretmek istiyorsak bu durumda gerçek dünyaya dönmeliyiz. Evrendeki en tahmin edilemez şey doğanın kendisidir (Entropi) bu yüzden bu kaynakları kullanarak gerçek bir rastgelelik sağlayabiliriz.
+
+### En Güçlü Yol: Kuantum Fiziği ve Radyoaktif Bozunma
+
+Bir radyoaktif izotopun (örneğin Uranyum'un bir parçasının) içindeki tek bir atomun tam olarak hangi milisaniyede bozunup ışıma yapacağı fiziksel olarak önceden kesinlikle hesaplanamaz. Bu, evrendeki en saf ve kırılmaz "rastgelelik" türlerinden biri olarak donanımsal üreteçlerde kullanılır.
+
+### Cloudflare'in Meşhur Lav Lambaları
+
+![Cloudflare merkezindeki lav lambaları duvarı](/blog/randomness-lava-lamps.jpg)
+
+Cloudflare genel merkezinin lobisindeki duvarlardan birine yaklaşık 100 adet lav lambası yerleştirdi ve lambalara yönlendirilmiş bir kamera kurdu. Kamera, lambaların fotoğraflarını düzenli aralıklarla çekiyor ve görüntüleri sunucularına gönderiyor. Tüm dijital görüntüler, bilgisayarlar tarafından bir dizi sayı olarak depolanıyor; her pikselin kendine ait bir sayısal değeri var ve bu lambaların bir sonraki hareketi hiçbir zaman bilinemiyor, böylece her görüntü, Cloudflare sunucularının güvenli şifreleme anahtarları oluşturmak için başlangıç noktası olarak kullanabileceği tamamen rastgele bir sayı dizisi haline geliyor.
+
+### Bir Başka Yöntem: Atmosferik Gürültü
+
+Hayatınızda mutlaka radyo dinlemişsinizdir. Radyoda kanal ararken frekanslar arasında dolaştığımız sırada duyduğumuz o "cızırtı" (beyaz gürültü), aslında dünyadaki yıldırımların ve atmosferik olayların kaotik sesidir. Örneğin, popüler bir servis olan Random.org, sayılarını doğrudan bu radyo gürültülerini dinleyerek üretir.
+
+## Kapanış
+
+<Callout type="tip">
+  İşte böyle, dünyanın en deterministik yapılarında bile kaos bir şekilde kendisine yer buluyor ve sihrini yapıyor. Günümüzde bu sihri; şifrelerimizden kriptolojiye, güvenlikten dijital gizliliğimize kadar her alanda kullanıyoruz.
+</Callout>
+
+Okuduğunuz için teşekkürler, bir başka yazıda görüşmek üzere.

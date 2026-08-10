@@ -12,8 +12,9 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
-import { Clock } from "lucide-react";
+import { ArrowLeft, Clock } from "lucide-react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
@@ -118,6 +119,14 @@ export default async function Blog({
           ]),
         }}
       />
+
+      <Link
+        href="/blog"
+        className="inline-flex items-center gap-1.5 text-sm text-neutral-500 hover:text-blue-500 dark:text-neutral-400 dark:hover:text-blue-400 transition-colors mb-4"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        Blog&apos;a Dön
+      </Link>
 
       <Breadcrumb className="mb-6">
         <BreadcrumbList>

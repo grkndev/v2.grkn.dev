@@ -1,0 +1,81 @@
+---
+title: "Axios NPM Supply Chain Attack: Geliştiriciler Nasıl Hedef Alındı?"
+publishedAt: "2026-03-31"
+summary: "100 milyondan fazla indirilen Axios NPM paketine yapılan tedarik zinciri saldırısı: ele geçirilen bir maintainer hesabı üzerinden yayımlanan zararlı sürümler, gizli bir postinstall script'i ile sistemlere Remote Access Trojan (RAT) bulaştırdı."
+tags: ["Cyber Security", "Supply Chain", "npm", "JavaScript"]
+image: "/blog/axios-supply-chain-attack.png"
+---
+
+![Axios NPM Supply Chain Attack](/blog/axios-supply-chain-attack.png)
+
+Modern yazılım geliştirme süreçlerinde açık kaynak bağımlılıkları kritik bir rol oynar. Ancak bu bağımlılıklar, aynı zamanda saldırganlar için ciddi bir saldırı yüzeyi oluşturur. Geçtiğimiz günlerde 100 milyonu aşkın indirmeye sahip ve Node.js'in popüler kütüphanelerinden biri olan Axios'a yapılan bu saldırı, bunun en güncel ve çarpıcı örneklerinden biri oldu.
+
+## Saldırı Nasıl Gerçekleşti?
+
+Saldırganlar, Axios projesine ait bir maintainer hesabını ele geçirerek zararlı sürümler yayımladı:
+
+- `axios@1.14.1`
+- `axios@0.30.4`
+
+Bu sürümler ilk bakışta normal görünüyordu. Çünkü Axios'un ana kodu değiştirilmemişti. Bunun yerine saldırganlar daha sofistike bir yöntem kullandı.
+
+Projeye gizlice eklenen bir dependency (`plain-crypto-js`) üzerinden çalışan bir `postinstall` script'i, sistemlere zararlı yazılım yükledi.
+
+## Teknik Detay: RAT (Remote Access Trojan)
+
+Yüklenen zararlı yazılım bir **Remote Access Trojan (RAT)** idi ve şu yeteneklere sahipti:
+
+- Windows, macOS ve Linux sistemlerde çalışabilme
+- Komut & kontrol (C2) sunucusuna bağlanma
+- Uzaktan komut çalıştırma
+- Ek payload indirme
+
+<Callout type="warning">
+  Daha da kritik olan nokta ise şuydu: malware çalıştıktan sonra kendini siliyor ve `package.json` dosyasını temiz bir versiyonla değiştiriyordu. Bu durum, saldırının tespit edilmesini ciddi şekilde zorlaştırdı.
+</Callout>
+
+## Neden Bu Kadar Tehlikeli?
+
+Bu saldırıyı kritik yapan başlıca faktörler:
+
+- Axios'un milyonlarca geliştirici tarafından kullanılması
+- Zararlı kodun doğrudan kütüphanede bulunmaması
+- Sadece `npm install` çalıştırmanın yeterli olması
+- CI/CD pipeline'larının da etkilenebilmesi
+
+<Callout type="warning">
+  Yani geliştirici hiçbir kod çalıştırmasa bile sistem kompromize olabiliyor.
+</Callout>
+
+## Kimler Risk Altında?
+
+Zararlı sürümler kısa süre yayında kaldı (yaklaşık 2–3 saat). Ancak bu süre içinde:
+
+- Yeni bağımlılık kuran projeler
+- Otomatik build sistemleri
+- CI/CD pipeline'ları
+
+risk altına girdi.
+
+## Ne Yapılmalı?
+
+Eğer bu sürümler kullanıldıysa:
+
+- Sistem kompromize kabul edilmeli
+- Tüm şifreler ve tokenlar değiştirilmelidir
+- CI/CD logları detaylı incelenmelidir
+- Mümkünse sistem yeniden kurulmalıdır
+
+Ayrıca güvenli bir Axios sürümüne geçiş yapılmalıdır.
+
+## Sonuç
+
+Axios olayı, modern yazılım ekosisteminde en büyük risklerden birinin **dependency chain** olduğunu bir kez daha gösterdi. Bu saldırı, doğrudan geliştirici makinelerini ve otomasyon sistemlerini hedef alarak klasik güvenlik yaklaşımlarının ötesine geçti.
+
+<Callout type="tip">
+  Açık kaynak kullanımı devam ettikçe, bu tür saldırılara karşı daha bilinçli ve proaktif olmak kritik hale geliyor.
+</Callout>
+
+## Kaynaklar
+
+- **Haber Kaynağı:** [stepsecurity.io — Axios Compromised on npm: Malicious Versions Drop Remote Access Trojan](https://www.stepsecurity.io/blog/axios-compromised-on-npm-malicious-versions-drop-remote-access-trojan)

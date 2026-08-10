@@ -24,29 +24,31 @@ export function BlogCard({
   className,
 }: BlogCardProps) {
   return (
-    <Link href={`/blog/${slug}`} className={cn("block group", className)}>
+    <Link href={`/blog/${slug}`} className={cn("block group h-full", className)}>
       <MagicCard
-        className="p-5 cursor-pointer border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950"
+        className="h-full p-5 cursor-pointer border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950"
         gradientColor="#2563eb15"
         gradientFrom="#2563eb"
         gradientTo="#7c3aed"
       >
         <div className="flex flex-col h-full gap-3">
           <div className="flex items-start justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-violet-500 shadow-lg shadow-blue-500/20">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-violet-500 shadow-lg shadow-blue-500/20 shrink-0">
                 <Notebook className="w-5 h-5 text-white" />
               </div>
-              <h3 className="font-semibold text-base text-neutral-900 dark:text-neutral-100 group-hover:text-blue-500 transition-colors">
+              <h3 className="font-semibold text-base text-neutral-900 dark:text-neutral-100 group-hover:text-blue-500 transition-colors min-w-0">
                 {title}
               </h3>
             </div>
-            <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-blue-500 group-hover:translate-x-1 transition-all" />
+            <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-blue-500 group-hover:translate-x-1 transition-all shrink-0" />
           </div>
 
-          <p className="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2 flex-grow">
-            {summary}
-          </p>
+          <div className="flex-grow">
+            <p className="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2">
+              {summary}
+            </p>
+          </div>
 
           {tags && tags.length > 0 && (
             <div className="flex flex-wrap gap-1">
