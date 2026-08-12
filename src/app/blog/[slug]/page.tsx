@@ -16,6 +16,7 @@ import { ArrowLeft, Clock } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
@@ -41,7 +42,9 @@ export async function generateMetadata({
     image,
   } = post.metadata;
   const url = `${DATA.url}/blog/${slug}`;
-  const ogImage = image ? `${DATA.url}${image}` : `${DATA.url}/blog/${slug}/opengraph-image`;
+  const ogImage = image
+    ? `${DATA.url}${image}`
+    : `${DATA.url}/blog/${slug}/opengraph-image`;
 
   return {
     title,
@@ -84,7 +87,9 @@ export default async function Blog({
   const { metadata, readingMinutes } = post;
   const { content, headings } = compiled;
   const url = `${DATA.url}/blog/${slug}`;
-  const ogImage = metadata.image ? `${DATA.url}${metadata.image}` : `${url}/opengraph-image`;
+  const ogImage = metadata.image
+    ? `${DATA.url}${metadata.image}`
+    : `${url}/opengraph-image`;
 
   return (
     <section id="blog">
@@ -111,9 +116,24 @@ export default async function Blog({
               "@context": "https://schema.org",
               "@type": "BreadcrumbList",
               itemListElement: [
-                { "@type": "ListItem", position: 1, name: "Home", item: DATA.url },
-                { "@type": "ListItem", position: 2, name: "Blog", item: `${DATA.url}/blog` },
-                { "@type": "ListItem", position: 3, name: metadata.title, item: url },
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Home",
+                  item: DATA.url,
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Blog",
+                  item: `${DATA.url}/blog`,
+                },
+                {
+                  "@type": "ListItem",
+                  position: 3,
+                  name: metadata.title,
+                  item: url,
+                },
               ],
             },
           ]),
@@ -147,7 +167,7 @@ export default async function Blog({
       <h1 className="title font-medium text-2xl tracking-tighter max-w-[650px]">
         {metadata.title}
       </h1>
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-2 mb-8 text-sm max-w-[650px]">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mt-2 mb-6 text-sm max-w-[650px]">
         <PostDate
           date={metadata.publishedAt}
           className="text-sm text-neutral-600 dark:text-neutral-400"
@@ -156,13 +176,25 @@ export default async function Blog({
           <Clock className="w-3.5 h-3.5" />
           {readingMinutes} dk okuma
         </span>
-        {metadata.tags?.map((tag) => (
-          <Badge key={tag} variant="secondary" className="text-xs">
-            {tag}
-          </Badge>
-        ))}
+        <div className="flex items-center gap-1 flex-wrap">
+          {metadata.tags?.map((tag) => (
+            <Badge key={tag} variant="secondary" className="text-xs">
+              {tag}
+            </Badge>
+          ))}
+        </div>
       </div>
-
+      <div className="flex items-center gap-2 mb-4">
+        <Avatar className="w-8 h-8">
+          <AvatarImage src="/me.jpg" />
+          <AvatarFallback>GÇ</AvatarFallback>
+        </Avatar>
+        <div className="flex flex-col">
+          <span className="text-xs text-muted-foreground">Yazar</span>
+          <span className="text-sm font-medium">Gürkan Çiloğlu</span>
+        </div>
+      </div>
+      <div className="border-t border-neutral-200 dark:border-neutral-800 my-6 rounded-full" />
       <div className="flex flex-col lg:flex-row lg:gap-12">
         <div className="flex-1 min-w-0">
           <div className="lg:hidden mb-6">
@@ -174,12 +206,13 @@ export default async function Blog({
 
           <Link
             href="/blog"
-            className="inline-flex items-center gap-1.5 mt-10 pt-6 border-t border-neutral-200 dark:border-neutral-800 text-sm text-neutral-500 hover:text-blue-500 dark:text-neutral-400 dark:hover:text-blue-400 transition-colors"
+            className="w-full flex flex-row justify-center items-center gap-1.5 mt-10 pt-6 border-t border-neutral-200 dark:border-neutral-800 text-sm text-neutral-500 hover:text-blue-500 dark:text-neutral-400 dark:hover:text-blue-400 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            Blog&apos;a Dön
+            <span className="">Blog&apos;a Dön</span>
           </Link>
         </div>
+
         <div className="hidden lg:block">
           <TocSidebar headings={headings} />
         </div>
